@@ -1,0 +1,19 @@
+{
+    "name": "patika/twitter-clone",
+    "description": "PHP Simple Twitter Clone",
+    "autoload": {
+        "psr-4": {
+            "App\\": "./App",
+            "Core\\": "./Core"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ahmet Parlak",
+            "email": "ahmet--parlak@outlook.com"
+        }
+    ],
+    "require": {
+        "bramus/router": "~1.6"
+    }
+}
