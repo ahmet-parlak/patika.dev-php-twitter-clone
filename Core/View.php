@@ -1,7 +1,7 @@
 <?php
 namespace Core;
 
-class Veiw
+class View
 {
     public $content;
     public function load($viewName, $data = [])
