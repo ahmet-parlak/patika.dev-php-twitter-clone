@@ -2,6 +2,7 @@
 namespace Core;
 
 use Bramus\Router\Router;
+
 class Starter
 {
     public Router $router;
@@ -16,10 +17,16 @@ class Starter
     {
         //Create Router
         $this->router = new Router();
+
+        //Create Database
         $this->db = new Database();
+
+        //Create Request
         $this->request = new Request();
+
+        //Create View
         $this->view = new View();
-        
+
     }
 
 }
