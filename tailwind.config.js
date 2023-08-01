@@ -6,7 +6,31 @@ module.exports = {
     "./app/view/**/*.{php,js}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        blue: {
+          50: "#e4eefd",
+          100: "#c7dcfb",
+          200: "#a9cbf8",
+          300: "#88bbf6",
+          400: "#61abf3",
+          500: "#1d9bf0",
+          600: "#247fc4",
+          700: "#256599",
+          800: "#224b71",
+          900: "#1c334b",
+          950: "#141d28",
+        },
+        default: "#1d9bf0",
+        dark: "#15202b",
+        disabled: "#195e8d",
+        hoverblue: "#1a8cd8",
+
+      },
+      width: {
+        '598': '37.375rem',
+      },
+    },
   },
   plugins: [],
 }
