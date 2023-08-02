@@ -7,6 +7,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        echo $this->view->load('home/index');
+        $data['navbar'] = $this->view->load('static/navbar');
+        
+        echo $this->view->load('home/index', compact('data'));
     }
 }
