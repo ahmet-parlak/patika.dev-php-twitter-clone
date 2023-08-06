@@ -13,9 +13,22 @@ class Auth extends Model
 
     }
 
-    public function register()
+    public function register($data): bool
     {
+        $values = [
+            'username' => $data['username'],
+            'name' => $data['name'],
+            'password' => $this->passwordHash($data['username']),
+        ];
 
+        return $this->db->insert('users', $values);
+    }
+
+    public function isUsernameUnique($username): bool
+    {
+        $query = $this->db->pdo()->prepare("SELECT * From users WHERE username = :username");
+        $query->execute(array('username' => $username));
+        return $query->rowCount() > 0 ? false : true;
     }
 
 

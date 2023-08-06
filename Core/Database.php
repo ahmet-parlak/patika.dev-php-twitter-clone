@@ -27,6 +27,12 @@ class Database
     }
 
 
+    public function pdo()
+    {
+        return $this->db;
+    }
+
+
     public function fetch($sql): array
     {
         return $this->db->query($sql, \PDO::FETCH_ASSOC)->fetch() ?? [];
@@ -38,7 +44,7 @@ class Database
     }
 
 
-    public function insert($table, $values): bool
+    public function insert($table, $values)
     {
         try {
             $columns = implode(", ", array_keys($values));
