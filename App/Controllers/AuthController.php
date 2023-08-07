@@ -13,74 +13,51 @@ class AuthController extends Controller
 
     public function register()
     {
-        $data = $this->request->post();
+        $data = $this->request->post(); //Get posted data
 
-        if (!($data['username'] ?? null) || !($data['password'] ?? null) || !($data['confirm_password'] ?? null) || !($data['name'] ?? null)) {
-            $status = 'error';
-            $title = 'Ops! Attention!';
-            $message = 'Please enter all fields';
-            echo json_encode(['status' => $status, 'title' => $title, 'message' => $message]);
-            exit();
+        /* Validation */
+        if (!($data['username'] ?? null) || !($data['password'] ?? null) || !($data['confirm_password'] ?? null) || !($data['name'] ?? null)) //Expected data
+        {
+
+            errorResponse(message: 'Please enter all fields');
         }
 
-        if (strlen($data['username']) < 3 || strlen($data['name']) < 3) {
-            $status = 'error';
-            $title = 'Ops! Attention!';
-            $message = 'Username and name must be at least 3 characters.';
-            echo json_encode(['status' => $status, 'title' => $title, 'message' => $message]);
-            exit();
+        if (strlen($data['username']) < 3 || strlen($data['name']) < 3) //length control
+        {
+            errorResponse(message: 'Username and name must be at least 3 characters.');
         }
 
-        if (strlen($data['password']) < 6) {
-            $status = 'error';
-            $title = 'Ops! Attention!';
-            $message = 'Password must be at least 6 characters.';
-            echo json_encode(['status' => $status, 'title' => $title, 'message' => $message]);
-            exit();
+        if (strlen($data['password']) < 6) //password length control
+        {
+            errorResponse(message: 'Password must be at least 6 characters.');
         }
 
-        if (preg_match('/^[a-zA-Z0-9_]+$/', $data['username']) == false) {
-            $status = 'error';
-            $title = 'Ops! Attention!';
-            $message = 'The user name can only consist of letters, numbers and underscores (_).';
-            echo json_encode(['status' => $status, 'title' => $title, 'message' => $message]);
-            exit();
+        if ($data['password'] != $data['confirm_password']) //do passwords match
+        {
+            errorResponse(message: 'Passwords do not match!');
+        }
+
+        if (preg_match('/^[a-zA-Z0-9_]+$/', $data['username']) == false) //username pattern check
+        {
+            errorResponse(message: 'The user name can only consist of letters, numbers and underscores (_).');
         }
 
 
-        $auth = new Auth();
+        /* Registration */
+        $auth = new Auth(); //Create auth object for db and session operations
 
-        if ($auth->isUsernameUnique($data['username']) == false) {
-            $status = 'error';
-            $title = 'Ops! Attention!';
-            $message = 'This username is already taken';
-            echo json_encode(['status' => $status, 'title' => $title, 'message' => $message]);
-            exit();
+        if ($auth->isUsernameUnique($data['username']) == false) //is username unique
+        {
+            errorResponse(message: 'This username is already taken');
         }
 
-        if ($data['password'] != $data['confirm_password']) {
-            $status = 'error';
-            $title = 'Ops! Attention!';
-            $message = 'Passwords do not match!';
-            echo json_encode(['status' => $status, 'title' => $title, 'message' => $message]);
-            exit();
-        }
+        $status = $auth->register($data); //register data : bool
 
-
-        $staus = $auth->register($data);
-
-        if ($staus) {
-            $status = 'success';
-            $title = 'Successful';
-            $message = 'You have registered. You will be redirected to the home page...';
-            echo json_encode(['status' => $status, 'title' => $title, 'message' => $message]);
-            exit();
+        if ($status) //register control
+        {
+            successResponse(message: 'You have registered. You will be redirected to the home page...');
         } else {
-            $status = 'error';
-            $title = 'Ops! Attention!';
-            $message = 'An unexpected error occurred. Please try again';
-            echo json_encode(['status' => $status, 'title' => $title, 'message' => $message]);
-            exit();
+            errorResponse(message: 'An unexpected error occurred. Please try again');
         }
 
     }
