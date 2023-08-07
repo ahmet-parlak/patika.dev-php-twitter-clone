@@ -10,6 +10,10 @@ function route(string $route = ''): string
     return URL . $route;
 }
 
+function redirect($route = '')
+{
+    header('Location:' . URL . $route);
+}
 
 function requiredFields(array $expectedKeys, array $data): bool
 {
