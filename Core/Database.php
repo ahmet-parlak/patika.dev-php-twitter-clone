@@ -32,6 +32,11 @@ class Database
         return $this->db;
     }
 
+    public function prepare($query)
+    {
+        return $this->db->prepare($query);
+    }
+
 
     public function fetch($sql): array
     {
@@ -44,7 +49,7 @@ class Database
     }
 
 
-    public function insert($table, $values)
+    public function insert($table, $values, $getLastInsertId = false)
     {
         try {
             $columns = implode(", ", array_keys($values));
@@ -55,7 +60,7 @@ class Database
 
             $stmt->execute($values);
 
-            return true;
+            return $getLastInsertId ? $this->db->lastInsertId() : true;
 
         } catch (\PDOException $e) {
             return false;
@@ -120,6 +125,14 @@ class Database
         } catch (\PDOException $e) {
             return false;
         }
+    }
+
+    public function fetchWithId($table, $id)
+    {
+        $stmt = $this->prepare("SELECT * FROM $table WHERE id = :id");
+        $stmt->execute(['id' => $id]);
+
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
 }

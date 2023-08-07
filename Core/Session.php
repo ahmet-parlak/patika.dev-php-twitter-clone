@@ -15,7 +15,6 @@ class Session
 
     public static function removeSession()
     {
-        session_start();
         session_destroy();
     }
 }

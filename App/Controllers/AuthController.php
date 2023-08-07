@@ -68,12 +68,31 @@ class AuthController extends Controller
 
     public function login()
     {
+        $data = $this->request->post(); //Get posted data
 
+        /* Validation */
+        if (!requiredFields(['username', 'password'], $data)) //Expected data
+        {
+            warningResponse(message: 'Please enter username and password.');
+        }
+
+        /* Login */
+        $auth = new Auth(); //Create auth object for db and session operations
+
+        $status = $auth->login($data); //login user : bool
+
+        if ($status) //login control
+        {   
+            successResponse(message: 'Login successful. You are redirected to the home page...');
+        } else {
+            errorResponse(message: 'Username and password do not match.');
+        }
     }
 
     public function logout()
     {
-
+        \Core\Session::removeSession();
+        successResponse(message: 'Logout successful.');
     }
 
 }

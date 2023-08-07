@@ -8,9 +8,28 @@ class Auth extends Model
 {
 
 
-    public function login()
+    public function login($data): bool
     {
+        $username = $data['username'];
+        $password = $data['password'];
 
+        $stmt = $this->db->prepare('SELECT * FROM users WHERE username = :username');
+        $stmt->execute(['username' => $username]);
+
+        $userData = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $hash = $userData['password'];
+
+
+        if ($userData && $this->passwordVerify($password, $hash)) //if user exist and password correct 
+        {
+
+            $user = new User($userData);
+
+            $this->startSession($user);
+            return true;
+        }
+
+        return false;
     }
 
     public function register($data): bool
@@ -18,15 +37,28 @@ class Auth extends Model
         $values = [
             'username' => $data['username'],
             'name' => $data['name'],
-            'password' => $this->passwordHash($data['username']),
+            'password' => $this->passwordHash($data['password']),
         ];
 
-        return $this->db->insert('users', $values);
+        $id = $this->db->insert('users', $values, true); //insert user and get last insert id
+
+
+        if ($id) {
+            $data = $this->db->fetchWithId('users', $id); //get user data
+
+            $user = new User($data);
+
+            $this->startSession($user);
+
+            return true;
+        }
+
+        return false;
     }
 
     public function isUsernameUnique($username): bool
     {
-        $query = $this->db->pdo()->prepare("SELECT * From users WHERE username = :username");
+        $query = $this->db->prepare("SELECT * From users WHERE username = :username");
         $query->execute(array('username' => $username));
         return $query->rowCount() > 0 ? false : true;
     }
@@ -38,13 +70,14 @@ class Auth extends Model
         Session::setSession('login', true);
     }
 
+
     private function passwordHash($password): string
     {
         return password_hash($password, PASSWORD_DEFAULT);
     }
 
 
-    private function passwordVerify($password, $hashedPassword): bool
+    private function passwordVerify(string $password, string $hashedPassword): bool
     {
         return password_verify($password, $hashedPassword);
     }
