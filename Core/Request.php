@@ -18,4 +18,15 @@ class Request
     {
         return is_array($data) ? array_map('\Core\Request::filter', $data) : htmlspecialchars(trim($data));
     }
+
+    function required(array $expectedKeys, array $data): bool
+    {
+        foreach ($expectedKeys as $key) {
+
+            if (!isset($data[$key]))
+                return false;
+        }
+
+        return true;
+    }
 }

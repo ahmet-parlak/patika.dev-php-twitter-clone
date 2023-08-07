@@ -15,15 +15,4 @@ function redirect($route = '')
     header('Location:' . URL . $route);
 }
 
-function requiredFields(array $expectedKeys, array $data): bool
-{
-    foreach ($expectedKeys as $key) {
-
-        if (!isset($data[$key]))
-            return false;
-    }
-
-    return true;
-}
-
 ?>

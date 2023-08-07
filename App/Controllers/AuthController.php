@@ -3,9 +3,11 @@ namespace App\Controllers;
 
 use App\Model\Auth;
 use Core\Controller;
+use Core\Request;
 
 class AuthController extends Controller
 {
+
     public function registerPage()
     {
         echo $this->view->load('auth/register');
@@ -13,10 +15,11 @@ class AuthController extends Controller
 
     public function register()
     {
+
         $data = $this->request->post(); //Get posted data
 
         /* Validation */
-        if (!requiredFields(['username', 'password', 'confirm_password'], $data)) //Expected data
+        if (!$this->request->required(['username', 'password', 'confirm_password'], $data)) //Expected data
         {
             errorResponse(message: 'Please enter all fields');
         }
@@ -71,7 +74,7 @@ class AuthController extends Controller
         $data = $this->request->post(); //Get posted data
 
         /* Validation */
-        if (!requiredFields(['username', 'password'], $data)) //Expected data
+        if (!$this->request->required(['username', 'password'], $data)) //Expected data
         {
             warningResponse(message: 'Please enter username and password.');
         }
@@ -82,7 +85,7 @@ class AuthController extends Controller
         $status = $auth->login($data); //login user : bool
 
         if ($status) //login control
-        {   
+        {
             successResponse(message: 'Login successful. You are redirected to the home page...');
         } else {
             errorResponse(message: 'Username and password do not match.');
