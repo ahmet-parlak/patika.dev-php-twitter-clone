@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" class="h-full">
+<?php
+$title = 'Login | Twitter Clone';
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Twitter Clone </title>
-
-    <link href="<?= assets('dist/tailwind.css') ?>" rel="stylesheet">
-</head>
+includeStaticFile('header', compact('title'));
+?>
 
 <body>
     <main class="grid place-items-center h-screen pb-24">
@@ -31,7 +26,8 @@
                     <input
                         class="bg-slate-950 text-white px-6 py-2 rounded-full font-bold cursor-pointer hover:bg-slate-900 hover:shadow-sm"
                         type="submit" value="Login"></input>
-                    <p>Don't have an account yet?<a href="<?= route('register') ?>" class="text-default hover:underline mx-2">Sign up</a></p>
+                    <p>Don't have an account yet?<a href="<?= route('register') ?>"
+                            class="text-default hover:underline mx-2">Sign up</a></p>
                 </div>
             </form>
         </div>
