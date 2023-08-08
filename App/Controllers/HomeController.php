@@ -9,6 +9,6 @@ class HomeController extends Controller
     {
         $data['navbar'] = $this->view('static/navbar');
 
-        echo $this->view('home/index', compact('data'));
+        $this->render('home/index', compact('data'));
     }
 }

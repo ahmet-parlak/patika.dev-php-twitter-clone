@@ -7,4 +7,9 @@ class Controller extends Starter
     {
         return $this->view->load($viewName, $data);
     }
+
+    public function render($viewName, $data = [])
+    {
+        echo $this->view->load($viewName, $data);
+    }
 }

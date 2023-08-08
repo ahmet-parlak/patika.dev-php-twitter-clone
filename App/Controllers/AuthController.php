@@ -10,7 +10,7 @@ class AuthController extends Controller
 
     public function registerPage()
     {
-        echo $this->view->load('auth/register');
+        $this->render('auth/register');
     }
 
     public function register()
@@ -66,7 +66,7 @@ class AuthController extends Controller
 
     public function loginPage()
     {
-        echo $this->view->load('auth/login');
+        $this->render('auth/login');
     }
 
     public function login()
