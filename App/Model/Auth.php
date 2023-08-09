@@ -17,7 +17,7 @@ class Auth extends Model
         $stmt->execute(['username' => $username]);
 
         $userData = $stmt->fetch(\PDO::FETCH_ASSOC);
-        $hash = $userData['password'];
+        $hash = $userData['password'] ?? '';
 
 
         if ($userData && $this->passwordVerify($password, $hash)) //if user exist and password correct 

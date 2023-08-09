@@ -14,20 +14,27 @@ includeStaticFile('header', compact('title'));
                     <h1>Login to Tweet App</h1>
                     <div class="inputs flex flex-col gap-5 text-center mt-7 mb-4">
                         <input id="username" class="p-4 border-2 rounded-sm text-lg" type="text" name="username"
-                            placeholder="@username" required>
+                            placeholder="@username" autocomplete="off" required>
                         <input id="password" class="p-4 border-2 rounded-sm text-lg" type="password" name="password"
                             placeholder="password" required>
                     </div>
-                    <div class="val-errs text-red-700 font-semibold hidden">
-                        <ul>
-                            <li>username or password is wrong! </li>
-                        </ul>
+                    <div class="toast-message val-errs text-red-700 font-semibold">
+
                     </div>
+
                     <input
                         class="bg-slate-950 text-white px-6 py-2 rounded-full font-bold cursor-pointer hover:bg-slate-900 hover:shadow-sm"
                         type="submit" value="Login"></input>
+
                     <p>Don't have an account yet?<a href="<?= route('register') ?>"
                             class="text-default hover:underline mx-2">Sign up</a></p>
+
+                    <!-- Loading Indicator -->
+                    <?php
+                    $message = 'Action in progress';
+                    includeStaticFile('widgets/loading', compact('message'));
+                    ?>
+
                 </div>
             </form>
         </div>
@@ -37,7 +44,7 @@ includeStaticFile('header', compact('title'));
 
     <!-- Footer -->
     <?php
-    $scripts = ['js/login.js'];
+    $scripts = ['js/login.js', 'js/script.js'];
     includeStaticFile('footer', compact('scripts'));
     ?>
 

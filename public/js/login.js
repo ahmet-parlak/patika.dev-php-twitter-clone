@@ -12,12 +12,17 @@ loginForm.addEventListener('submit', (e) => {
     formData.append('password', password);
 
     submitBtn.disabled = true; //prevent consecutive submission of the form 
-
+    removeToast();
+    loadingOn();
+    
     //post
     axios.post(actionURL, formData).then(res => {
+        toast(res.data.status, res.data.message);    
         if (res.data.redirect) {
             window.location.href = res.data.redirect;
         }
+        submitBtn.disabled = false;
+        loadingOff();
     });
 
 });
