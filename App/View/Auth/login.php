@@ -9,14 +9,14 @@ includeStaticFile('header', compact('title'));
         <!-- Content -->
         <div class="container mx-auto w-598">
             <!-- Login Box -->
-            <form action="" method="POST">
+            <form id="login-form" action="<?= route('login') ?>">
                 <div class="flex flex-col gap-8 text-center mt-8 p-14 px-24 border rounded-lg shadow-xl text-base">
                     <h1>Login to Tweet App</h1>
                     <div class="inputs flex flex-col gap-5 text-center mt-7 mb-4">
-                        <input class="p-4 border-2 rounded-sm text-lg" type="text" name="username"
-                            placeholder="@username">
-                        <input class="p-4 border-2 rounded-sm text-lg" type="password" name="password"
-                            placeholder="password">
+                        <input id="username" class="p-4 border-2 rounded-sm text-lg" type="text" name="username"
+                            placeholder="@username" required>
+                        <input id="password" class="p-4 border-2 rounded-sm text-lg" type="password" name="password"
+                            placeholder="password" required>
                     </div>
                     <div class="val-errs text-red-700 font-semibold hidden">
                         <ul>
@@ -32,6 +32,17 @@ includeStaticFile('header', compact('title'));
             </form>
         </div>
     </main>
+
+
+
+    <!-- Footer -->
+    <?php
+    $scripts = ['js/login.js'];
+    includeStaticFile('footer', compact('scripts'));
+    ?>
+
+
+
 </body>
 
 </html>

@@ -86,7 +86,7 @@ class AuthController extends Controller
 
         if ($status) //login control
         {
-            successResponse(message: 'Login successful. You are redirected to the home page...');
+            successResponse(message: 'Login successful. You are redirected to the home page...', redirect:route());
         } else {
             errorResponse(message: 'Username and password do not match.');
         }
