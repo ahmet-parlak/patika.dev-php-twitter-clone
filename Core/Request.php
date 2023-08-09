@@ -23,7 +23,7 @@ class Request
     {
         foreach ($expectedKeys as $key) {
 
-            if (!isset($data[$key]))
+            if (!isset($data[$key]) || strlen($data[$key]) == 0)
                 return false;
         }
 
