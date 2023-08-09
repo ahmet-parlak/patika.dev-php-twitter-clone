@@ -44,7 +44,7 @@ includeStaticFile('header', compact('title'));
 
     <!-- Footer -->
     <?php
-    $scripts = ['js/login.js', 'js/script.js'];
+    $scripts = ['js/login.js'];
     includeStaticFile('footer', compact('scripts'));
     ?>
 

@@ -4,6 +4,7 @@
 
 <!-- REQUIRED SCRIPTS -->
 <script src="<?= assets('dist/bundle.js') ?>"></script>
+<script src="<?= assets('js/script.js') ?>"></script>
 
 <?php
 if ($scripts ?? false) {

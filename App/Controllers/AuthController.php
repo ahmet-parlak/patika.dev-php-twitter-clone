@@ -95,7 +95,7 @@ class AuthController extends Controller
     public function logout()
     {
         \Core\Session::removeSession();
-        successResponse(message: 'Logout successful.');
+        successResponse(message: 'Logout successful.', redirect: route());
     }
 
 }

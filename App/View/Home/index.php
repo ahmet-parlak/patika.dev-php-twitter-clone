@@ -34,6 +34,11 @@
             <!-- Other tweets will be listed here -->
         </div>
     </div>
+
+    <!-- Footer -->
+    <?php
+    includeStaticFile('footer');
+    ?>
 </body>
 
 </html>
