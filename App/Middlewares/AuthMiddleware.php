@@ -6,14 +6,23 @@ use Core\Session;
 
 class AuthMiddleware extends Middleware
 {
-    public function isLogin()
+    public function auth()
     {
         $isLogin = Session::getSession('login');
 
-        if (!$isLogin) //is login false
+        if (!$isLogin) //is not authenticated
         {
             Session::removeSession();
             redirect('login');
+        }
+    }
+    public function notAuth()
+    {
+        $isLogin = Session::getSession('login');
+
+        if ($isLogin) //is authenticated
+        {
+            redirect('');
         }
     }
 }

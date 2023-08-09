@@ -1,13 +1,15 @@
 <?php
 
 /* Middlewares */
-$router->before('GET|POST', '/', 'Middlewares\AuthMiddleware@isLogin');
+$router->before('GET|POST', '/', 'Middlewares\AuthMiddleware@auth');
+$router->before('GET|POST', '/login', 'Middlewares\AuthMiddleware@notAuth');
+$router->before('GET|POST', '/register', 'Middlewares\AuthMiddleware@notAuth');
 
 
 
 
 //Home
-$router->get("/", 'Controllers\HomeController@index');
+$router->get("/", 'Controllers\HomeController@index'); //Home Page
 
 
 //Authorization
