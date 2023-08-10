@@ -32,4 +32,35 @@ function includeStaticFile($staticFile, $data = [])
     require BASEDIR . "/app/view/static/$staticFile.php";
 }
 
+
+
+function auth($attribute = null)
+{
+    $user = \Core\Session::auth();
+
+    if ($user == false) {
+        return false;
+    }
+
+    switch ($attribute) {
+        case 'name':
+            return $user->name;
+
+        case 'username':
+            return $user->username;
+
+        case 'password':
+            return $user->password;
+
+        case 'photo_url':
+            return $user->photo_url;
+
+        case 'about':
+            return $user->about;
+
+        default:
+            return $user;
+    }
+}
+
 ?>

@@ -702,6 +702,14 @@ h3 {
   height: 100vh;
 }
 
+.h-10 {
+  height: 2.5rem;
+}
+
+.h-11 {
+  height: 2.75rem;
+}
+
 .w-12 {
   width: 3rem;
 }
@@ -720,6 +728,14 @@ h3 {
 
 .w-full {
   width: 100%;
+}
+
+.w-10 {
+  width: 2.5rem;
+}
+
+.w-11 {
+  width: 2.75rem;
 }
 
 .max-w-xs {
@@ -937,6 +953,10 @@ h3 {
   text-align: center;
 }
 
+.text-end {
+  text-align: end;
+}
+
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -963,6 +983,18 @@ h3 {
 
 .font-semibold {
   font-weight: 600;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .text-blue-600 {

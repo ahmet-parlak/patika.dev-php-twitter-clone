@@ -16,9 +16,18 @@
 
         <!-- Profile -->
         <div class="flex items-center space-x-2 divide-x font-semibold	">
-            <div class="profile flex items-center gap-2">
-                <a href="" class="text-white">User Name</a>
-                <div class="w-8 h-8 bg-gray-300 rounded-full"></div>
+            <div class="profile flex items-center gap-3">
+                <a href="" class="text-white text-end">
+                    <p class="text-lg font-bold capitalize">
+                        <?= auth('name') ?>
+                    </p>
+                    <p class="font-normal">
+                        <?= '@' . auth('username') ?>
+                    </p>
+                </a>
+                <div class="w-11 h-11 bg-gray-300 rounded-full">
+                    <img src="<?= auth('photo_url') ?>" alt="profile photo">
+                </div>
             </div>
             <div class="log-out flex">
                 <button action="<?= route('logout') ?>" onclick="logout(this)" class="text-white pl-2">Log

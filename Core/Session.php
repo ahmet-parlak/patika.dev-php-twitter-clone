@@ -17,4 +17,15 @@ class Session
     {
         session_destroy();
     }
+
+    public static function auth(): \App\Model\User|false
+    {
+        $user = self::getSession('user');
+
+        if ($user == false) {
+            return false;
+        } else {
+            return unserialize($user);
+        }
+    }
 }

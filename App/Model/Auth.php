@@ -64,9 +64,9 @@ class Auth extends Model
     }
 
 
-    private function startSession($user)
+    private function startSession(User $user)
     {
-        Session::setSession('user', $user);
+        Session::setSession('user', serialize($user));
         Session::setSession('login', true);
     }
 
