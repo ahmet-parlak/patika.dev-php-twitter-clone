@@ -31,8 +31,9 @@
                 </div>
             </div>
             <div class="log-out flex">
-                <button action="<?= route('logout') ?>" onclick="logout(this)" class="text-white pl-2">Log
-                    out</button>
+                <button action="<?= route('logout') ?>" onclick="logout(this)" class="text-white pl-4">
+                    <i class="fa-solid fa-arrow-right-from-bracket text-2xl" title="log out"></i>
+                </button>
                 <?php
                 $color = 'white';
                 includeStaticFile('widgets/loading', compact('color'));
