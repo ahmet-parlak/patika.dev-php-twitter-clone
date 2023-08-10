@@ -26,7 +26,8 @@
                     </p>
                 </a>
                 <div class="w-11 h-11 bg-gray-300 rounded-full">
-                    <img src="<?= auth('photo_url') ?>" alt="profile photo">
+                    <img class="rounded-full" src="<?= auth('photo_url') ?>" alt="profile photo"
+                        onerror="this.src='<?= assets('images/profile/default.png') ?>'">
                 </div>
             </div>
             <div class="log-out flex">
