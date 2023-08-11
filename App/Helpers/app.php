@@ -43,6 +43,9 @@ function auth($attribute = null)
     }
 
     switch ($attribute) {
+        case 'id':
+            return $user->id;
+
         case 'name':
             return $user->name;
 

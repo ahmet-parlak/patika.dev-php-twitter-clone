@@ -4,10 +4,8 @@ namespace Core;
 class Model extends Starter
 {
     protected $table;
-    protected $id;
 
-    protected $created_date;
-    protected $updated_date;
-
-
+    public $id;
+    public $created_date;
+    public $updated_date;
 }
