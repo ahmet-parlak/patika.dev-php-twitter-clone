@@ -25,7 +25,7 @@ module.exports = {
         },
         default: "#1d9bf0",
         dark: "#15202b",
-        disabled: "#195e8d",
+        disabled: "#177cc0",
         hoverblue: "#1a8cd8",
 
       },

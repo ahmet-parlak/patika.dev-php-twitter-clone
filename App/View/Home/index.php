@@ -8,14 +8,20 @@
     <div class="container mx-auto w-598">
         <!-- Tweet Box -->
         <div class="mt-8 p-4 border rounded-lg shadow-md">
-            <textarea class="w-full p-2 text-gray-700 resize-none outline-0	"
-                placeholder="What's happening?"></textarea>
-            <div class="flex flex-row-reverse justify-between items-center mt-2">
-                <button class="bg-default text-white px-6 py-2 rounded-full font-bold hover:bg-hoverblue">Tweet</button>
-                <div class="flex items-center space-x-2">
-                    <span class="text-gray-500">0 character</span>
+            <form id="tweet-form" action="<?= route('tweet') ?>">
+                <textarea id="tweet_content" class="w-full p-2 text-gray-700 resize-none outline-0 text-lg"
+                    placeholder="What's happening?" oninput="charCount(this)" minlength="1" maxlength="180"
+                    rows="3"></textarea>
+                <div class="flex flex-row-reverse justify-between items-center mt-2">
+                    <button type="submit"
+                        class="bg-default text-white px-6 py-2 rounded-full font-bold hover:bg-hoverblue cursor-pointer disabled:bg-disabled disabled:hover:bg-disabled disabled:cursor-default disabled:text-gray-50"
+                        disabled><div class="flex">Tweet</div></button>
+                        
+                    <div class="flex items-center space-x-2">
+                        <span id="char-count" class="text-gray-500"></span>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
 
         <!-- Tweets -->
@@ -37,7 +43,8 @@
 
     <!-- Footer -->
     <?php
-    includeStaticFile('footer');
+    $scripts = ['js/home.js'];
+    includeStaticFile('footer', compact('scripts'));
     ?>
 </body>
 
