@@ -4,30 +4,23 @@ const submitBtn = document.querySelector("#tweet-form [type='submit']");
 tweetForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const actionURL = tweetForm.getAttribute('action');
-    const content = document.getElementById('tweet_content').value;
+    const contentElement = document.getElementById('tweet_content');
+    const content = contentElement.value;
     const formData = new FormData();
 
-    formData.append('tweet_content', content);
     submitBtn.disabled = true; //prevent consecutive submission of the form 
 
     if (content.length > 0 & content.length < 180) {
-
+        formData.append('tweet_content', content);
         //post
         axios.post(actionURL, formData).then(res => {
-            toast(res.data.status, res.data.message);
-            if (res.data.redirect) {
-                window.location.href = res.data.redirect;
-            }
-
+            snackbar(res.data.message);
         }).catch(function (error) {
-            console.log(error.response.status);
-        }).then(() => {
-            submitBtn.disabled = false;
-        });
-    } else {
-        submitBtn.disabled = false;
-    }
-
+            snackbar(error.response.status);
+        })
+    } 
+    contentElement.value = ''
+    charCount(contentElement);
 });
 /* #Post Tweet# */
 
