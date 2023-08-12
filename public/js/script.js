@@ -93,25 +93,30 @@ function snackbar(message = 'Successful', faIcon = 'twitter') {
 /* #Snackbar# */
 
 /* Add Tweet */
-function addTweet(tweet) {
+function addTweet(tweet, toTop = false) {
   const tweets = document.querySelector(".tweets");  //tweets parent div
 
   const parent = document.createElement('div');  //tweet div
-  parent.classList.add("border", "rounded-lg", "p-4");
+  parent.classList.add("border", "rounded-lg", "p-4", "flex", "space-x-4", "transition-all", "ease-in-out", "duration-500", "opacity-0");
 
-  tweets.appendChild(parent);  //append tweet to tweets
-
-  const userParent = document.createElement('div');  //user div
-  userParent.classList.add("flex", "space-x-4");
-
-  parent.appendChild(userParent);  //append user to parent
+  if (toTop) {
+    tweets.insertBefore(parent, tweets.firstChild);
+  } else {
+    tweets.appendChild(parent);  //append tweet to tweets on bottom
+  }
 
   const userPhoto = document.createElement('div');  //photo div
   userPhoto.classList.add("w-12", "h-12", "bg-gray-300", "rounded-full");
+  parent.appendChild(userPhoto);  //append photo to user parent
 
-  userParent.appendChild(userPhoto);  //append photo to user parent
+
+  const userParent = document.createElement('div');  //user div
+  userParent.classList.add("flex", "flex-col");
+
+  parent.appendChild(userParent);  //append user to parent
 
   const userNameParent = document.createElement('div');  //username div
+  userNameParent.classList.add("flex", "space-x-2");
 
   const userName = document.createElement('a'); //user name
   userName.classList.add("font-bold");
@@ -131,7 +136,12 @@ function addTweet(tweet) {
   tweetContent.classList.add("mt-2");
   tweetContent.textContent = tweet.content;
 
-  parent.appendChild(tweetContent);
+  userParent.appendChild(tweetContent);
+
+  /* Show Tweet */
+  setTimeout(() => {
+    parent.classList.remove('opacity-0');
+  }, 0);
 }
 /* #Add Tweet# */
 
