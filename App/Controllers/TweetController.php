@@ -25,10 +25,14 @@ class TweetController extends Controller
 
             $tweetModel = new Tweet($tweetContent);
 
-            $post = $tweetModel->create();
+            $tweet = $tweetModel->create();
 
-            if ($post) {
-                ResponseHelper::successResponse(message: 'The tweet has been sent');
+            if ($tweet) {
+
+                $user = ['name' => $tweet['name'], 'username' => $tweet['username'], 'photo_url' => $tweet['photo_url'], 'profile_url' => route('user/' . $tweet['username'])];
+                $data = ['content' => $tweet['content'], 'date' => $tweet['created_at'], 'user' => $user];
+
+                ResponseHelper::successResponse(message: 'The tweet has been sent', data: $data);
             } else {
                 ResponseHelper::errorResponse();
             }

@@ -15,6 +15,9 @@ tweetForm.addEventListener('submit', (e) => {
         //post
         axios.post(actionURL, formData).then(res => {
             snackbar(res.data.message);
+            if(res.data.status == 'success'){
+                addTweet(res.data.data);
+            }
         }).catch(function (error) {
             snackbar(error.response.status);
         })

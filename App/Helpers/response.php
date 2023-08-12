@@ -13,14 +13,18 @@ class ResponseHelper
         exit();
     }
 
-    public static function successResponse($title = 'Successful', $message = 'Transaction successful.', $redirect = null)
+    public static function successResponse($title = 'Successful', $message = 'Transaction successful.', $data = null, $redirect = null)
     {
-        $data = ['status' => 'success', 'title' => $title, 'message' => $message];
+        $response = ['status' => 'success', 'title' => $title, 'message' => $message];
+
+
+        if ($data != null)
+            $response['data'] = $data;
 
         if ($redirect != null)
-            $data['redirect'] = $redirect;
+            $response['redirect'] = $redirect;
 
-        echo json_encode($data);
+        echo json_encode($response);
         exit();
     }
 
