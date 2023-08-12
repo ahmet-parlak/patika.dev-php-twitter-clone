@@ -92,7 +92,48 @@ function snackbar(message = 'Successful', faIcon = 'twitter') {
 }
 /* #Snackbar# */
 
+/* Add Tweet */
+function addTweet(tweet) {
+  const tweets = document.querySelector(".tweets");  //tweets parent div
 
+  const parent = document.createElement('div');  //tweet div
+  parent.classList.add("border", "rounded-lg", "p-4");
+
+  tweets.appendChild(parent);  //append tweet to tweets
+
+  const userParent = document.createElement('div');  //user div
+  userParent.classList.add("flex", "space-x-4");
+
+  parent.appendChild(userParent);  //append user to parent
+
+  const userPhoto = document.createElement('div');  //photo div
+  userPhoto.classList.add("w-12", "h-12", "bg-gray-300", "rounded-full");
+
+  userParent.appendChild(userPhoto);  //append photo to user parent
+
+  const userNameParent = document.createElement('div');  //username div
+
+  const userName = document.createElement('a'); //user name
+  userName.classList.add("font-bold");
+  userName.href = tweet.user.url;
+  userName.textContent = tweet.user.name
+
+  const userUsername = document.createElement('p'); //username
+  userUsername.classList.add("text-gray-500");
+  userUsername.textContent = `@${tweet.user.username} • ${tweet.date}`;
+
+  userNameParent.appendChild(userName);  //append user name to user name
+  userNameParent.appendChild(userUsername); //append username to user name
+
+  userParent.appendChild(userNameParent);
+
+  const tweetContent = document.createElement('p');
+  tweetContent.classList.add("mt-2");
+  tweetContent.textContent = tweet.content;
+
+  parent.appendChild(tweetContent);
+}
+/* #Add Tweet# */
 
 
 /* Log Out */

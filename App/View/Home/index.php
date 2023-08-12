@@ -29,8 +29,10 @@
         </div>
 
         <!-- Tweets -->
-        <div class="mt-8 space-y-4">
-            <div class="border rounded-lg p-4">
+        <div class="tweets mt-8 space-y-4">
+
+            <!-- Template -->
+            <!-- <div class="border rounded-lg p-4">
                 <div class="flex space-x-4">
                     <div class="w-12 h-12 bg-gray-300 rounded-full"></div>
                     <div>
@@ -39,8 +41,8 @@
                     </div>
                 </div>
                 <p class="mt-2">This is an example tweet.</p>
-            </div>
-
+            </div> -->
+            <!-- #Template# -->
             <!-- Other tweets will be listed here -->
         </div>
     </div>

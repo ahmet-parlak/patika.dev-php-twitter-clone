@@ -18,7 +18,7 @@ tweetForm.addEventListener('submit', (e) => {
         }).catch(function (error) {
             snackbar(error.response.status);
         })
-    } 
+    }
     contentElement.value = ''
     charCount(contentElement);
 });
@@ -40,3 +40,18 @@ function charCount(e) {
 
 }
 /* #Tweet Content Length# */
+
+const tweet = {
+    content: "This is an example tweet.",
+    user: {
+        name: "Name",
+        username: "username",
+        photo_url: "",
+        profile_url: ""
+    },
+    date: "1h",
+};
+
+addTweet(tweet);
+addTweet(tweet);
+addTweet(tweet);
