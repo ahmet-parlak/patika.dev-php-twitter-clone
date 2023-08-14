@@ -54,7 +54,3 @@ const tweet = {
     },
     date: "1h",
 };
-
-addTweet(tweet);
-addTweet(tweet);
-addTweet(tweet);

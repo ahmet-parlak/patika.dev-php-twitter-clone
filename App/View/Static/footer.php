@@ -1,5 +1,5 @@
 <!-- Footer -->
-
+<footer class="mt-6"><br></footer>
 
 
 <!-- REQUIRED SCRIPTS -->

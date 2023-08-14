@@ -7,10 +7,10 @@
         <!-- Menu -->
         <ul class="space-x-4 font-bold">
             <li class="inline-block">
-                <a href="#" class="text-white">Flow</a>
+                <a href="#" class="text-white">Discover</a>
             </li>
             <li class="inline-block">
-                <a href="#" class="text-white">Discover</a>
+                <a href="#" class="text-white">Following</a>
             </li>
         </ul>
 

@@ -10,4 +10,5 @@ const DB_PASSWORD = '';
 
 
 const DEFAULT_PAGE_TITLE = 'Twitter Clone | Patika.dev';
+const DEFAULT_PROFILE_PHOTO_URL = URL . "public/images/profile/default.png";
 ?>

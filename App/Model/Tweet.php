@@ -10,7 +10,7 @@ class Tweet extends Model
 
     public $user_id;
 
-    public function __construct(string $content, int $user_id = null)
+    public function __construct(string $content = null, int $user_id = null)
     {
         parent::__construct();
         $this->table = 'tweets';
@@ -36,5 +36,12 @@ class Tweet extends Model
         $stmt->execute(['id' => $id]);
 
         return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+
+    public function getAllTweets()
+    {
+        $stmt = "SELECT t.content, t.created_at as date, u.name, u.username, u.photo_url FROM tweets t JOIN users u ON u.id = t.user_id ORDER BY t.created_at DESC";
+        return $this->db->fetchAll($stmt, \PDO::FETCH_OBJ);
     }
 }

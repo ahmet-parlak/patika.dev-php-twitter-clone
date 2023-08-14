@@ -1,14 +1,15 @@
 <?php
 namespace App\Controllers;
 
+use App\Model\Tweet;
 use Core\Controller;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $data['navbar'] = $this->view('static/navbar');
-
-        $this->render('home/index', compact('data'));
+        $tweetModel = new Tweet();
+        $discover = $tweetModel->getAllTweets();
+        $this->render('home/index', compact('discover'));
     }
 }

@@ -43,9 +43,9 @@ class Database
         return $this->db->query($sql, \PDO::FETCH_ASSOC)->fetch() ?? [];
     }
 
-    public function fetchAll($sql): array
+    public function fetchAll($sql, $returnType = \PDO::FETCH_ASSOC): array
     {
-        return $this->db->query($sql, \PDO::FETCH_ASSOC)->fetchAll() ?? [];
+        return $this->db->query($sql, $returnType)->fetchAll() ?? [];
     }
 
 

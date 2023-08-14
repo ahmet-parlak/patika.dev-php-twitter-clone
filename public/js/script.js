@@ -105,7 +105,7 @@ function addTweet(tweet, toTop = false) {
     tweets.appendChild(parent);  //append tweet to tweets on bottom
   }
 
-  const userPhoto = document.createElement('div');  //photo div
+  const userPhoto = document.createElement('img');  //photo div
   userPhoto.classList.add("w-12", "h-12", "bg-gray-300", "rounded-full");
   parent.appendChild(userPhoto);  //append photo to user parent
 

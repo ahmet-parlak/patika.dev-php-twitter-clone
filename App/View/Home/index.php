@@ -2,7 +2,7 @@
 
 <body>
 
-    <?= $data['navbar'] ?>
+    <?php includeStaticFile('navbar'); ?>
 
     <div class="alerts relative h-12"></div>
 
@@ -32,16 +32,26 @@
         <div class="tweets mt-8 space-y-4">
 
             <!-- Template -->
-            <!-- <div class="border rounded-lg p-4 flex space-x-4">
-                <div class="w-11 h-11 bg-gray-300 rounded-full"></div>
-                <div class="flex flex-col">
-                    <div class="flex space-x-2">
-                        <a href="#" class="font-bold">John Doe</a>
-                        <p class="text-gray-500 text-md">@johnd • 1h</p>
+            <?php
+            foreach ($discover as $tweet) { ?>
+                <div class="border rounded-lg p-4 flex space-x-4">
+                    <img class="w-11 h-11 bg-gray-300 rounded-full" src="<?= $tweet->photo_url ?>" alt="profile photo"
+                        onerror="this.src='<?= DEFAULT_PROFILE_PHOTO_URL ?>'">
+                    <div class="flex flex-col">
+                        <div class="flex space-x-2">
+                            <a href="<?= route("user/$tweet->username") ?>" class="font-bold"><?= $tweet->name ?></a>
+                            <p class="text-gray-500 text-md">@
+                                <?= $tweet->username ?> •
+                                <?= $tweet->date ?>
+                            </p>
+                        </div>
+                        <p class="">
+                            <?= $tweet->content ?>
+                        </p>
                     </div>
-                    <p class="">This is an example tweet.</p>
                 </div>
-            </div> -->
+            <?php } ?>
+
             <!-- #Template# -->
             <!-- Other tweets will be listed here -->
         </div>
