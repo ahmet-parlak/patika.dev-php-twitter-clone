@@ -1,16 +1,13 @@
 <?php includeStaticFile('header'); ?>
 
 <body class="flex">
-
-
     <?php includeStaticFile('sidebar'); ?>
 
-
     <!-- Content -->
-    <div class="container w-598 px-1">
+    <div class="container w-598 border-r">
         <div class="alerts relative h-3"></div>
         <!-- Tweet Box -->
-        <div class="mt-8 p-4 border rounded-lg shadow-md">
+        <div class="mt-8 p-4 border-t">
             <form id="tweet-form" action="<?= route('tweet') ?>">
                 <textarea id="tweet_content" class="w-full p-2 text-gray-700 resize-none outline-0 text-lg"
                     placeholder="What's happening?" oninput="charCount(this)" minlength="1" maxlength="180"
@@ -30,31 +27,12 @@
         </div>
 
         <!-- Tweets -->
-        <div class="tweets mt-8 space-y-4">
-
-            <!-- Template -->
+        <div class="tweets mt-2 space-y-4">
             <?php
-            foreach ($discover as $tweet) { ?>
-                <div class="border rounded-lg p-4 flex space-x-4">
-                    <img class="w-11 h-11 bg-gray-300 rounded-full" src="<?= $tweet->photo_url ?>" alt="profile photo"
-                        onerror="this.src='<?= DEFAULT_PROFILE_PHOTO_URL ?>'">
-                    <div class="flex flex-col">
-                        <div class="flex space-x-2">
-                            <a href="<?= route("user/$tweet->username") ?>" class="font-bold"><?= $tweet->name ?></a>
-                            <p class="text-gray-500 text-md">
-                                <?= '@' . $tweet->username ?> •
-                                <?= $tweet->date ?>
-                            </p>
-                        </div>
-                        <p class="">
-                            <?= $tweet->content ?>
-                        </p>
-                    </div>
-                </div>
-            <?php } ?>
-
-            <!-- #Template# -->
-            <!-- Other tweets will be listed here -->
+            foreach ($discover as $tweet) {
+                includeStaticFile('widgets/tweet', compact('tweet'));
+            }
+            ?>
         </div>
     </div>
 

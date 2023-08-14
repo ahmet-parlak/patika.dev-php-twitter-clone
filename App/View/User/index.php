@@ -5,7 +5,7 @@
     <?php includeStaticFile('sidebar'); ?>
 
     <!-- Content -->
-    <div class="container w-598">
+    <div class="container w-598 border-r">
         <div class="alerts relative"></div>
         <div class="user">
             <div class="cover h-48 bg-default text-center flex flex-col justify-center"><i
@@ -16,10 +16,10 @@
                 <div class="actions p-2 w-full text-end"><button
                         class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-blue-600"
                         title="Friendship Request">
-                        <i class="fa-solid fa-user-plus"></i>
+                        Send Request<i class="fa-solid fa-user-plus ml-2"></i>
                 </div>
             </div>
-            <div class="footer mt-2 p-3 border-b-2">
+            <div class="footer p-3">
                 <div class="name flex flex-col">
                     <p class="text-3xl font-bold p-1">
                         <?= $user->name ?>
@@ -43,31 +43,12 @@
         </div>
 
         <!-- Tweets -->
-        <div class="tweets mt-8 space-y-4">
-
-            <!-- Template -->
+        <div class="tweets mt-4 space-y-4">
             <?php
-            foreach ($tweets as $tweet) { ?>
-                <div class="border rounded-lg p-4 flex space-x-4">
-                    <img class="w-11 h-11 bg-gray-300 rounded-full" src="<?= $user->photo_url ?>" alt="profile photo"
-                        onerror="this.src='<?= DEFAULT_PROFILE_PHOTO_URL ?>'">
-                    <div class="flex flex-col">
-                        <div class="flex space-x-2">
-                            <a href="<?= route("user/$user->username") ?>" class="font-bold"><?= $user->name ?></a>
-                            <p class="text-gray-500 text-md">
-                                <?= '@' . $user->username ?> •
-                                <?= $tweet->date ?>
-                            </p>
-                        </div>
-                        <p class="">
-                            <?= $tweet->content ?>
-                        </p>
-                    </div>
-                </div>
-            <?php } ?>
-
-            <!-- #Template# -->
-            <!-- Other tweets will be listed here -->
+            foreach ($tweets as $tweet) {
+                includeStaticFile('widgets/tweet', compact('tweet', 'user'));
+            }
+            ?>
         </div>
     </div>
 
