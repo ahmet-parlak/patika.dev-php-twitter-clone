@@ -1,15 +1,15 @@
 <!-- Navbar -->
-<nav class="bg-default p-4 w-full">
+<nav class="bg-default p-2 w-full">
     <div class="container mx-auto flex justify-between items-center">
         <!-- Logo -->
-        <a href="<?= route() ?>" class="text-white font-bold text-xl">Tweet App</a>
+        <a href="<?= route() ?>" class="text-white font-bold text-2xl">Tweet App</a>
 
         <!-- Menu -->
         <ul class="space-x-4 font-bold">
-            <li class="inline-block">
+            <li class="inline-block ms-10">
                 <a href="#" class="text-white">Discover</a>
             </li>
-            <li class="inline-block">
+            <li class="inline-block me-10">
                 <a href="#" class="text-white">Following</a>
             </li>
         </ul>
