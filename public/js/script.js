@@ -97,7 +97,7 @@ function addTweet(tweet, toTop = false) {
   const tweets = document.querySelector(".tweets");  //tweets parent div
 
   const parent = document.createElement('div');  //tweet div
-  parent.classList.add("border", "rounded-lg", "p-4", "flex", "space-x-4", "transition-all", "ease-in-out", "duration-500", "opacity-0");
+  parent.classList.add("border-t", "p-4", "flex", "space-x-4", "transition-all", "ease-in-out", "duration-500", "opacity-0");
 
   if (toTop) {
     tweets.insertBefore(parent, tweets.firstChild);

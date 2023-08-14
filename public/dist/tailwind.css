@@ -603,6 +603,10 @@ h3 {
   position: static;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -645,6 +649,10 @@ h3 {
 
 .end-0 {
   inset-inline-end: 0px;
+}
+
+.top-0 {
+  top: 0px;
 }
 
 .m-auto {
@@ -718,6 +726,10 @@ h3 {
 .me-0 {
   -webkit-margin-end: 0px;
           margin-inline-end: 0px;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
 }
 
 .inline-block {
@@ -1027,6 +1039,14 @@ h3 {
 
 .border-r {
   border-right-width: 1px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.border-t {
+  border-top-width: 1px;
 }
 
 .border-current {

@@ -1,4 +1,4 @@
-<div class="sidebar h-screen w-1/3 sticky flex flex-col justify-between pe-6 border-r">
+<div class="sidebar h-screen w-1/3 sticky top-0 flex flex-col justify-between pe-6 border-r">
     <div class="banner flex justify-end gap-6 p-4">
         <a href="<?= route() ?>" class="self-center">
             <i class="fa-brands fa-twitter text-default text-4xl "></i>
