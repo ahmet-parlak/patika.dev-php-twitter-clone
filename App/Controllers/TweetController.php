@@ -29,7 +29,7 @@ class TweetController extends Controller
 
             if ($tweet) {
 
-                $user = ['name' => $tweet['name'], 'username' => $tweet['username'], 'photo_url' => $tweet['photo_url'], 'profile_url' => route('user/' . $tweet['username'])];
+                $user = ['name' => $tweet['name'], 'username' => $tweet['username'], 'photo_url' => $tweet['photo_url'] ?? DEFAULT_PROFILE_PHOTO_URL, 'profile_url' => route('user/' . $tweet['username'])];
                 $data = ['content' => $tweet['content'], 'date' => $tweet['created_at'], 'user' => $user];
 
                 ResponseHelper::successResponse(message: 'The tweet has been sent', data: $data);

@@ -40,8 +40,8 @@
                     <div class="flex flex-col">
                         <div class="flex space-x-2">
                             <a href="<?= route("user/$tweet->username") ?>" class="font-bold"><?= $tweet->name ?></a>
-                            <p class="text-gray-500 text-md">@
-                                <?= $tweet->username ?> •
+                            <p class="text-gray-500 text-md">
+                                <?= '@' . $tweet->username ?> •
                                 <?= $tweet->date ?>
                             </p>
                         </div>

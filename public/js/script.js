@@ -107,6 +107,7 @@ function addTweet(tweet, toTop = false) {
 
   const userPhoto = document.createElement('img');  //photo div
   userPhoto.classList.add("w-12", "h-12", "bg-gray-300", "rounded-full");
+  userPhoto.src = tweet.user.photo_url
   parent.appendChild(userPhoto);  //append photo to user parent
 
 
@@ -120,7 +121,7 @@ function addTweet(tweet, toTop = false) {
 
   const userName = document.createElement('a'); //user name
   userName.classList.add("font-bold");
-  userName.href = tweet.user.url;
+  userName.href = tweet.user.profile_url;
   userName.textContent = tweet.user.name
 
   const userUsername = document.createElement('p'); //username
