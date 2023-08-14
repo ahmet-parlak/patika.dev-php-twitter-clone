@@ -1,11 +1,11 @@
 <!-- Navbar -->
-<nav class="bg-default p-4 w-full">
+<nav class="bg-default p-3 w-full">
     <div class="container mx-auto flex justify-between items-center">
         <!-- Logo -->
-        <a href="<?= route() ?>" class="text-white font-bold text-xl">Tweet App</a>
+        <a href="<?= route() ?>" class="w-1/3 text-white font-bold text-2xl">Tweet App</a>
 
         <!-- Menu -->
-        <ul class="space-x-4 font-bold">
+        <ul class="w-1/3 text-center space-x-4 font-bold">
             <li class="inline-block">
                 <a href="#" class="text-white">Discover</a>
             </li>
@@ -15,7 +15,7 @@
         </ul>
 
         <!-- Profile -->
-        <div class="flex items-center space-x-2 divide-x font-semibold	">
+        <div class="w-1/3 flex justify-end items-center space-x-2 divide-x font-semibold	">
             <div class="profile flex items-center gap-3">
                 <a href="" class="text-white text-end">
                     <p class="text-lg font-bold capitalize">
