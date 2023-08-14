@@ -1,13 +1,12 @@
 <?php includeStaticFile('header'); ?>
 
-<body>
+<body class="flex">
 
-    <?php includeStaticFile('navbar'); ?>
-
-    <div class="alerts relative h-3"></div>
+    <?php includeStaticFile('sidebar'); ?>
 
     <!-- Content -->
-    <div class="container mx-auto w-598">
+    <div class="container w-598">
+        <div class="alerts relative"></div>
         <div class="user">
             <div class="cover h-48 bg-default text-center flex flex-col justify-center"><i
                     class="fa-brands fa-twitter text-5xl" style="color: #ffffff;"></i></div>

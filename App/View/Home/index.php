@@ -1,13 +1,14 @@
 <?php includeStaticFile('header'); ?>
 
-<body>
+<body class="flex">
 
-    <?php includeStaticFile('navbar'); ?>
 
-    <div class="alerts relative h-12"></div>
+    <?php includeStaticFile('sidebar'); ?>
+
 
     <!-- Content -->
-    <div class="container mx-auto w-598">
+    <div class="container w-598 px-1">
+        <div class="alerts relative h-3"></div>
         <!-- Tweet Box -->
         <div class="mt-8 p-4 border rounded-lg shadow-md">
             <form id="tweet-form" action="<?= route('tweet') ?>">

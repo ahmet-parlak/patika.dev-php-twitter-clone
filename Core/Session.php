@@ -18,7 +18,7 @@ class Session
         session_destroy();
     }
 
-    public static function auth(): \App\Model\User|false
+    public static function auth()
     {
         $user = self::getSession('user');
 

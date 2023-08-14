@@ -16,16 +16,16 @@ class Auth extends Model
         $stmt = $this->db->prepare('SELECT * FROM users WHERE username = :username');
         $stmt->execute(['username' => $username]);
 
-        $userData = $stmt->fetch(\PDO::FETCH_ASSOC);
-        $hash = $userData['password'] ?? '';
+        $userData = $stmt->fetch(\PDO::FETCH_OBJ);
 
+        $hash = $userData->password ?? '';
+        
 
         if ($userData && $this->passwordVerify($password, $hash)) //if user exist and password correct 
         {
-
-            $user = new User($userData);
-
-            $this->startSession($user);
+            //$user = new User(data:$userData);
+            //print_r(serialize($userData)); exit();
+            $this->startSession($userData);
             return true;
         }
 
@@ -46,7 +46,7 @@ class Auth extends Model
         if ($id) {
             $data = $this->db->fetchWithId('users', $id); //get user data
 
-            $user = new User($data);
+            $user = new User(data: $data);
 
             $this->startSession($user);
 
@@ -64,7 +64,7 @@ class Auth extends Model
     }
 
 
-    private function startSession(User $user)
+    private function startSession($user)
     {
         Session::setSession('user', serialize($user));
         Session::setSession('login', true);
