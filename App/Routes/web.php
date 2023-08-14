@@ -31,4 +31,7 @@ $router->post("/tweet", 'Controllers\TweetController@tweet'); //Tweet
 //User
 $router->get("/user/([a-zA-Z0-9_]+)", 'Controllers\UserController@index'); //User page
 
+
+$router->set404('Controllers\ErrorController@_404');
+
 ?>
