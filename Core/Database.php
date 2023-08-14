@@ -127,12 +127,12 @@ class Database
         }
     }
 
-    public function fetchWithId($table, $id)
+    public function fetchWithId($table, $id, $fetchMode = \PDO::FETCH_ASSOC)
     {
         $stmt = $this->prepare("SELECT * FROM $table WHERE id = :id");
         $stmt->execute(['id' => $id]);
 
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $stmt->fetch($fetchMode);
     }
 
 }
