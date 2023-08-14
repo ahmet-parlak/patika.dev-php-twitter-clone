@@ -53,7 +53,7 @@ class User extends Model
 
     public function getTweets()
     {
-        $stmt = $this->db->prepare("SELECT content, created_at as date  FROM tweets WHERE user_id = $this->id");
+        $stmt = $this->db->prepare("SELECT content, created_at as date  FROM tweets WHERE user_id = $this->id ORDER BY created_at DESC");
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
