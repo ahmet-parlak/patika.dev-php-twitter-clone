@@ -13,10 +13,20 @@
             <div class="body flex justify-between ps-4">
                 <img class="w-32 h-32 rounded-full absolute transform -translate-y-1/2 p-1 bg-white"
                     src="<?= $user->photo_url ?>" alt="" onerror="this.src='<?= DEFAULT_PROFILE_PHOTO_URL ?>'">
-                <div class="actions p-2 w-full text-end"><button
-                        class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-blue-600"
-                        title="Friendship Request">
-                        Send Request<i class="fa-solid fa-user-plus ml-2"></i>
+                <div class="actions p-2 w-full text-end">
+                    <?php
+                    if (auth('id') == $user->id) { ?>
+                        <button
+                            class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-blue-600"
+                            title="Friendship Request" onclick="location.href='<?= route('profile') ?>'">
+                            Profile Settings<i class="fa-solid fa-user-gear ml-2"></i>
+                        <?php } else { ?>
+                            <button
+                                class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-blue-600"
+                                title="Friendship Request">
+                                Send Request<i class="fa-solid fa-user-plus ml-2"></i>
+                            <?php } ?>
+
                 </div>
             </div>
             <div class="footer p-3">
