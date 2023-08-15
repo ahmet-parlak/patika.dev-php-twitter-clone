@@ -132,5 +132,26 @@ class Auth extends Model
             return false;
         }
     }
+    public function updateAbout($about): bool
+    {
+        try {
+            $id = auth('id');
+            $query = $this->db->prepare("UPDATE users SET about = :about WHERE id = $id");
+            $query->execute(array('about' => $about));
+
+            if ($query->rowCount() > 0) {
+
+                $this->refreshSession();
+
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (\Throwable $th) {
+            print_r($th);
+            return false;
+        }
+    }
 
 }

@@ -74,6 +74,10 @@ class ProfileController extends Controller
         $currentName = auth('name');
         $newName = $data['name'];
 
+        if ($newName == $currentName) //if the current username is posted 
+        {
+            \ResponseHelper::errorResponse(message: 'You are already using this name');
+        }
 
         $auth = new Auth(); //Create auth object for db and session operations
 
@@ -81,6 +85,40 @@ class ProfileController extends Controller
 
         if ($isUpdated) {
             \ResponseHelper::successResponse(message: 'Name changed.', redirect: route('profile'));
+        } else {
+            \ResponseHelper::errorResponse(message: 'Somethins wrong. Please try again.');
+        }
+    }
+
+    public function updateAbout()
+    {
+        $data = $this->request->post();
+
+        /* Validation */
+        if (!isset($data['about'])) {
+            \ResponseHelper::errorResponse(message: 'Somethings wrong. Please refresh the page!');
+        }
+
+        if (strlen($data['about']) > 150) //length control
+        {
+            \ResponseHelper::errorResponse(message: 'The About section can consist of a maximum of 150 characters.');
+        }
+
+        /* About Control */
+        $currentAbout = auth('about');
+        $newAbout = $data['about'];
+
+        if ($newAbout == $currentAbout) //if the current username is posted 
+        {
+            \ResponseHelper::errorResponse(message: 'No change');
+        }
+
+        $auth = new Auth(); //Create auth object for db and session operations
+
+        $isUpdated = $auth->updateAbout($newAbout);
+
+        if ($isUpdated) {
+            \ResponseHelper::successResponse(message: 'About section updated', redirect: route('profile'));
         } else {
             \ResponseHelper::errorResponse(message: 'Somethins wrong. Please try again.');
         }
