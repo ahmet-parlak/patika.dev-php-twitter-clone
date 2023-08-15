@@ -7,6 +7,7 @@ $router->before('GET|POST', '/logout', 'Middlewares\AuthMiddleware@auth'); //mus
 $router->before('GET|POST', '/login', 'Middlewares\AuthMiddleware@notAuth'); //must be logged out to access the login page
 $router->before('GET|POST', '/register', 'Middlewares\AuthMiddleware@notAuth'); //must be logged out to access the registration page
 $router->before('GET|POST', '/user/.*', 'Middlewares\AuthMiddleware@auth'); //must be authenticated to access the user page 
+$router->before('GET|POST', '/profile', 'Middlewares\AuthMiddleware@auth'); //must be authenticated to access the profile page 
 
 
 
@@ -32,6 +33,11 @@ $router->post("/tweet", 'Controllers\TweetController@tweet'); //Tweet
 $router->get("/user/([a-zA-Z0-9_]+)", 'Controllers\UserController@index'); //User page
 
 
+//Profile
+$router->get("/profile", 'Controllers\ProfileController@index'); //User page
+
+
+//404
 $router->set404('Controllers\ErrorController@_404');
 
 ?>
