@@ -65,6 +65,15 @@ class Auth extends Model
         Session::setSession('user', serialize($user));
         Session::setSession('login', true);
     }
+    private function refreshSession()
+    {
+        $userid = auth('id');
+        $q = $this->db->prepare('SELECT * FROM users where id = :id');
+        $q->execute(['id' => $userid]);
+        $user = $q->fetchObject();
+        Session::setSession('user', serialize($user));
+        Session::setSession('login', true);
+    }
 
 
     private function passwordHash($password): string
@@ -76,6 +85,30 @@ class Auth extends Model
     private function passwordVerify(string $password, string $hashedPassword): bool
     {
         return password_verify($password, $hashedPassword);
+    }
+
+
+    public function updateUsername($username): bool
+    {
+        try {
+            $id = auth('id');
+            $query = $this->db->prepare("UPDATE users SET username = :username WHERE id = $id");
+            $query->execute(array('username' => $username));
+
+
+            if ($query->rowCount() > 0) {
+
+                $this->refreshSession();
+
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (\Throwable $th) {
+            print_r($th);
+            return false;
+        }
     }
 
 }

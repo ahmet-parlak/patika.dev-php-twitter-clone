@@ -59,8 +59,11 @@ function snackbar(message = 'Successful', faIcon = 'twitter') {
   snackbarDiv.role = 'alert';
   snackbarDiv.classList.add("absolute", "left-1/2", "-translate-x-1/2", "top-1/3", "flex", "items-center", "w-full", "max-w-xs", "p-4", "space-x-4", "text-gray-500", "bg-white", "divide-x", "divide-gray-200", "rounded-lg", "shadow", "dark:text-gray-400", "dark:divide-gray-700", "space-x", "dark:bg-gray-800", "transition-all", "ease-in-out", "duration-500", "opacity-0");
 
-  snackbarDiv.innerHTML = `<i class="fa-brands fa-${faIcon} text-default"></i>`;
-
+  if (faIcon == 'twitter') {
+    snackbarDiv.innerHTML = `<i class="fa-brands fa-${faIcon} text-default"></i>`;
+  }else{
+    snackbarDiv.innerHTML = `<i class="fa-solid fa-${faIcon} text-default"></i>`;
+  }
 
   const snackbarContent = document.createElement('div');
   snackbarContent.classList.add("pl-4", "text-sm", "font-normal");
@@ -85,9 +88,9 @@ function snackbar(message = 'Successful', faIcon = 'twitter') {
     /* RemoveSnackbar */
     setTimeout(() => {
       snackbarDiv.remove();
-    }, 1300);
+    }, 2600);
 
-  }, 1200);
+  }, 2500);
 
 }
 /* #Snackbar# */

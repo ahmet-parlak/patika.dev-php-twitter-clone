@@ -35,6 +35,11 @@ $router->get("/user/([a-zA-Z0-9_]+)", 'Controllers\UserController@index'); //Use
 
 //Profile
 $router->get("/profile", 'Controllers\ProfileController@index'); //User page
+$router->post("/profile/username", 'Controllers\ProfileController@updateUsername'); //Update username
+$router->post("/profile/name", 'Controllers\ProfileController@updateName'); //Update name
+$router->post("/profile/photo", 'Controllers\ProfileController@updatePhoto'); //Update photo
+$router->post("/profile/about", 'Controllers\ProfileController@updateAbout'); //Update about
+$router->post("/profile/password", 'Controllers\ProfileController@updatePassword'); //Update password
 
 
 //404

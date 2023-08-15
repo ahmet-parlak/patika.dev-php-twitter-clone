@@ -34,9 +34,9 @@ $user = auth();
                             class="inline-flex w-12 justify-center bg-gray-50 items-center px-3 text-xl text-gray-900  border border-r-0 border-gray-300 rounded-l-md font-bold">
                             @
                         </span>
-                        <input type="text" id="name"
+                        <input type="text" id="username"
                             class="rounded-none bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5"
-                            value="<?= $user->username ?>">
+                            value="<?= $user->username ?>" required >
                         <button
                             class="p-2 px-4 font-bold bg-gray-50 text-dark border border-l-0 border-gray-300 rounded-r-md hover:shadow-md hover:shadow-gray-400 hover:bg-transparent"
                             type="submit">Save</button>
@@ -85,7 +85,7 @@ $user = auth();
                             class="inline-flex w-12 justify-center bg-gray-50 items-center px-3 text-xl text-gray-900  border border-r-0 border-gray-300 rounded-l-md">
                             <i class="fa-solid fa-key"></i>
                         </span>
-                        <input type="password" id="name"
+                        <input type="password" id="current_password"
                             class="rounded-none bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5"
                             placeholder="Current Password">
                     </div>
@@ -94,7 +94,7 @@ $user = auth();
                             class="inline-flex w-12 justify-center bg-gray-50 items-center px-3 text-xl text-gray-900  border border-r-0 border-gray-300 rounded-l-md">
                             <i class="fa-solid fa-lock"></i>
                         </span>
-                        <input type="password" id="name"
+                        <input type="password" id="new_password"
                             class="rounded-none bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5"
                             placeholder="New Password">
                     </div>
@@ -103,7 +103,7 @@ $user = auth();
                             class="inline-flex w-12 justify-center bg-gray-50 items-center px-3 text-xl text-gray-900  border border-r-0 border-gray-300 rounded-l-md">
                             <i class="fa-solid fa-lock"></i>
                         </span>
-                        <input type="password" id="name"
+                        <input type="password" id="new_password_confirm"
                             class="rounded-none bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5"
                             placeholder="Confirm New Password">
                     </div>
@@ -119,7 +119,7 @@ $user = auth();
 
     <!-- Footer -->
     <?php
-    $scripts = ['js/home.js'];
+    $scripts = ['js/profile.js'];
     includeStaticFile('footer', compact('scripts'));
     ?>
 </body>
