@@ -82,7 +82,7 @@ class Auth extends Model
     }
 
 
-    private function passwordVerify(string $password, string $hashedPassword): bool
+    public function passwordVerify(string $password, string $hashedPassword): bool
     {
         return password_verify($password, $hashedPassword);
     }
@@ -138,6 +138,29 @@ class Auth extends Model
             $id = auth('id');
             $query = $this->db->prepare("UPDATE users SET about = :about WHERE id = $id");
             $query->execute(array('about' => $about));
+
+            if ($query->rowCount() > 0) {
+
+                $this->refreshSession();
+
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (\Throwable $th) {
+            print_r($th);
+            return false;
+        }
+    }
+
+    public function updatePassword($password): bool
+    {
+        try {
+            $id = auth('id');
+            $password = $this->passwordHash($password);
+            $query = $this->db->prepare("UPDATE users SET password = :password WHERE id = $id");
+            $query->execute(array('password' => $password));
 
             if ($query->rowCount() > 0) {
 

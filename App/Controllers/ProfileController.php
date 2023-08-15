@@ -17,7 +17,7 @@ class ProfileController extends Controller
         $data = $this->request->post();
 
         /* Validation */
-        if ($this->request->required($data, array('username'))) {
+        if (!$this->request->required(array('username'), $data)) {
             \ResponseHelper::errorResponse(message: 'Enter a username');
         }
 
@@ -61,7 +61,7 @@ class ProfileController extends Controller
         $data = $this->request->post();
 
         /* Validation */
-        if ($this->request->required($data, array('name'))) {
+        if (!$this->request->required(array('name'), $data)) {
             \ResponseHelper::errorResponse(message: 'Please enter your name');
         }
 
@@ -123,4 +123,54 @@ class ProfileController extends Controller
             \ResponseHelper::errorResponse(message: 'Somethins wrong. Please try again.');
         }
     }
+
+
+    public function updatePassword()
+    {
+        $data = $this->request->post();
+        $expected = ['current_password', 'new_password', 'confirm_new_password'];
+
+        /* Validation */
+        if (!$this->request->required($expected, $data)) {
+            \ResponseHelper::errorResponse(message: 'Please enter all fields!');
+        }
+
+        if (strlen($data['new_password']) < 6) //length control
+        {
+            \ResponseHelper::errorResponse(message: 'New password must be at least 6 characters!');
+        }
+
+        $currentPassword = $data['current_password'];
+        $newPassword = $data['new_password'];
+        $confirmPassword = $data['confirm_new_password'];
+
+        if ($newPassword != $confirmPassword) {
+            \ResponseHelper::errorResponse(message: 'Passwords do not match!');
+        }
+
+        /* Password Control */
+        $auth = new Auth(); //Create auth object for db and session operations
+
+        if (!$auth->passwordVerify($currentPassword, auth('password'))) //if the current password is wrong 
+        {
+            \ResponseHelper::errorResponse(message: 'You entered your current password incorrectly!');
+        }
+
+
+
+        $isUpdated = $auth->updatePassword($newPassword);
+
+        if ($isUpdated) {
+            \ResponseHelper::successResponse(message: 'Password updated.');
+        } else {
+            \ResponseHelper::errorResponse(message: 'Somethins wrong. Please try again.');
+        }
+    }
+
+    public function updatePhoto()
+    {
+        \ResponseHelper::errorResponse(message: 'This feature is still in the development stage.');
+    }
+
+
 }

@@ -17,7 +17,6 @@ usernameForm.addEventListener('submit', (e) => {
             if (res.data.status == 'success') {
                 snackbar(res.data.message, 'check');
                 usernameSubmitBtn.disabled = false;
-                isSuccess = true;
             } else {
                 snackbar(res.data.message, 'circle-exclamation');
             }
@@ -55,7 +54,6 @@ nameForm.addEventListener('submit', (e) => {
             if (res.data.status == 'success') {
                 snackbar(res.data.message, 'check');
                 nameSubmitBtn.disabled = false;
-                isSuccess = true;
             } else {
                 snackbar(res.data.message, 'circle-exclamation');
             }
@@ -93,7 +91,6 @@ aboutForm.addEventListener('submit', (e) => {
             if (res.data.status == 'success') {
                 snackbar(res.data.message, 'check');
                 aboutSubmitBtn.disabled = false;
-                isSuccess = true;
             } else {
                 snackbar(res.data.message, 'circle-exclamation');
             }
@@ -109,5 +106,87 @@ aboutForm.addEventListener('submit', (e) => {
     aboutSubmitBtn.disabled = false;
 
 });
-/* #Update Abput# */
+/* #Update About# */
+
+
+/* Update Password */
+const passwordForm = document.getElementById('password-form');
+const passwordSubmitBtn = document.querySelector("#password-form [type='submit']");
+
+passwordForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const actionURL = passwordForm.getAttribute('action');
+    const currentPasswordInput = document.getElementById('current_password');
+    const currentPassword = currentPasswordInput.value;
+
+    const newPasswordInput = document.getElementById('new_password');
+    const newPassword = newPasswordInput.value;
+
+    const confirmNewPasswordInput = document.getElementById('confirm_new_password');
+    const confirmNewPassword = confirmNewPasswordInput.value;
+    const formData = new FormData();
+
+    passwordSubmitBtn.disabled = true; //prevent consecutive submission of the form 
+    formData.append('current_password', currentPassword);
+    formData.append('new_password', newPassword);
+    formData.append('confirm_new_password', confirmNewPassword);
+    //post
+    axios.post(actionURL, formData).then(res => {
+        if (res.data.status == 'success') {
+            snackbar(res.data.message, 'check');
+            passwordSubmitBtn.disabled = false;
+            currentPasswordInput.value = '';
+            newPasswordInput.value = '';
+            confirmNewPasswordInput.value = '';
+        } else {
+            snackbar(res.data.message, 'circle-exclamation');
+        }
+
+        if (res.data.redirect) {
+            location.href = res.data.redirect;
+        }
+    }).catch(function (error) {
+        snackbar(error.response.status, 'triangle-exclamation');
+    })
+
+    passwordSubmitBtn.disabled = false;
+
+});
+/* #Update Password# */
+
+
+/* Update Profile Photo */
+const photoForm = document.getElementById('photo-form');
+const photoSubmitBtn = document.querySelector("#photo-form [type='submit']");
+
+photoForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const actionURL = photoForm.getAttribute('action');
+    const photoInput = document.getElementById('current_password');
+    const photo = photoInput.value;
+
+    const formData = new FormData();
+
+    passwordSubmitBtn.disabled = true; //prevent consecutive submission of the form 
+    formData.append('photo', photo);
+    //post
+    axios.post(actionURL, formData).then(res => {
+        if (res.data.status == 'success') {
+            snackbar(res.data.message, 'check');
+            passwordSubmitBtn.disabled = false;
+        } else {
+            snackbar(res.data.message, 'circle-exclamation');
+        }
+
+        if (res.data.redirect) {
+            location.href = res.data.redirect;
+        }
+    }).catch(function (error) {
+        snackbar(error.response.status, 'triangle-exclamation');
+    })
+
+    passwordSubmitBtn.disabled = false;
+
+});
+/* #Update Profile Photo# */
 
