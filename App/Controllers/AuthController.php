@@ -19,7 +19,7 @@ class AuthController extends Controller
         $data = $this->request->post(); //Get posted data
 
         /* Validation */
-        if (!$this->request->required(['username', 'password', 'confirm_password'], $data)) //Expected data
+        if (!$this->request->required(['username', 'name', 'password', 'confirm_password'], $data)) //Expected data
         {
             ResponseHelper::errorResponse(message: 'Please enter all fields!');
         }
