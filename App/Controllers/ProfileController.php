@@ -35,10 +35,11 @@ class ProfileController extends Controller
         {
             \ResponseHelper::errorResponse(message: 'The user name can only consist of letters, numbers and underscores (_)');
         }
-
-        if (strlen($data['username']) < 3) //length control
+        
+        $minUsernameLen = MIN_USERNAME_LENGTH;
+        if (strlen($data['username']) < $minUsernameLen) //length control
         {
-            \ResponseHelper::errorResponse(message: 'Username must be at least 3 characters!');
+            \ResponseHelper::errorResponse(message: "Username must be at least $minUsernameLen characters!");
         }
 
         $auth = new Auth(); //Create auth object for db and session operations
@@ -65,9 +66,11 @@ class ProfileController extends Controller
             \ResponseHelper::errorResponse(message: 'Please enter your name');
         }
 
-        if (strlen($data['name']) < 3) //length control
+        /* Length */
+        $minNameLen = MIN_NAME_LENGTH;
+        if (strlen($data['name']) < $minNameLen) //length control
         {
-            \ResponseHelper::errorResponse(message: 'Name must be at least 3 characters!');
+            \ResponseHelper::errorResponse(message: "Name must be at least $minNameLen characters!");
         }
 
         /* Name Control */
@@ -99,9 +102,10 @@ class ProfileController extends Controller
             \ResponseHelper::errorResponse(message: 'Somethings wrong. Please refresh the page!');
         }
 
-        if (strlen($data['about']) > 150) //length control
+        $maxAboutLen = MAX_ABOUT_LENGTH;
+        if (strlen($data['about']) > $maxAboutLen) //length control
         {
-            \ResponseHelper::errorResponse(message: 'The About section can consist of a maximum of 150 characters.');
+            \ResponseHelper::errorResponse(message: "The About section can consist of a maximum of $maxAboutLen characters.");
         }
 
         /* About Control */
@@ -134,10 +138,12 @@ class ProfileController extends Controller
         if (!$this->request->required($expected, $data)) {
             \ResponseHelper::errorResponse(message: 'Please enter all fields!');
         }
+        
+        $minPassLen = MIN_PASSWORD_LENGTH;
 
-        if (strlen($data['new_password']) < 6) //length control
+        if (strlen($data['new_password']) < $minPassLen) //length control
         {
-            \ResponseHelper::errorResponse(message: 'New password must be at least 6 characters!');
+            \ResponseHelper::errorResponse(message: "New password must be at least $minPassLen characters!");
         }
 
         $currentPassword = $data['current_password'];

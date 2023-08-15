@@ -24,14 +24,23 @@ class AuthController extends Controller
             ResponseHelper::errorResponse(message: 'Please enter all fields!');
         }
 
-        if (strlen($data['username']) < 3 || strlen($data['name']) < 3) //length control
+        $minUsernameLen = MIN_USERNAME_LENGTH;
+        $minNameLen = MIN_NAME_LENGTH;
+        $minPasswordLen = MIN_PASSWORD_LENGTH;
+
+        if (strlen($data['username']) < $minUsernameLen) //username length control
         {
-            ResponseHelper::errorResponse(message: 'Username and name must be at least 3 characters!');
+            ResponseHelper::errorResponse(message: "Username and name must be at least $minUsernameLen characters!");
         }
 
-        if (strlen($data['password']) < 6) //password length control
+        if (strlen($data['name']) < $minNameLen) //name length control
         {
-            ResponseHelper::errorResponse(message: 'Password must be at least 6 characters!');
+            ResponseHelper::errorResponse(message: "Username and name must be at least $minNameLen characters!");
+        }
+
+        if (strlen($data['password']) < $minPasswordLen) //password length control
+        {
+            ResponseHelper::errorResponse(message: "Password must be at least $minPasswordLen characters!");
         }
 
         if ($data['password'] != $data['confirm_password']) //do passwords match
