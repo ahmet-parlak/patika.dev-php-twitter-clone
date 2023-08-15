@@ -65,24 +65,22 @@ class ProfileController extends Controller
             \ResponseHelper::errorResponse(message: 'Please enter your name');
         }
 
+        if (strlen($data['name']) < 3) //length control
+        {
+            \ResponseHelper::errorResponse(message: 'Name must be at least 3 characters!');
+        }
 
         /* Name Control */
         $currentName = auth('name');
         $newName = $data['name'];
 
-       
-
 
         $auth = new Auth(); //Create auth object for db and session operations
-        if ($auth->isUsernameUnique($data['username']) == false) //is username unique
-        {
-            \ResponseHelper::errorResponse(message: 'This username is already taken!');
-        }
 
-        $isUpdated = $auth->updateUsername($newName);
+        $isUpdated = $auth->updateName($newName);
 
         if ($isUpdated) {
-            \ResponseHelper::successResponse(message: 'Username changed.', redirect: route('profile'));
+            \ResponseHelper::successResponse(message: 'Name changed.', redirect: route('profile'));
         } else {
             \ResponseHelper::errorResponse(message: 'Somethins wrong. Please try again.');
         }

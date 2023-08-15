@@ -34,3 +34,41 @@ usernameForm.addEventListener('submit', (e) => {
 
 });
 /* #Update Username# */
+
+
+/* Update Name */
+const nameForm = document.getElementById('name-form');
+const nameSubmitBtn = document.querySelector("#name-form [type='submit']");
+const nameInput = document.getElementById('name');
+let nameInitialValue = nameInput.value
+nameForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const actionURL = nameForm.getAttribute('action');
+    const name = nameInput.value;
+    const formData = new FormData();
+
+    nameSubmitBtn.disabled = true; //prevent consecutive submission of the form 
+    if (name.length > 0 && nameInitialValue != name) {
+        formData.append('name', name);
+        //post
+        axios.post(actionURL, formData).then(res => {
+            if (res.data.status == 'success') {
+                snackbar(res.data.message, 'check');
+                nameSubmitBtn.disabled = false;
+                isSuccess = true;
+            } else {
+                snackbar(res.data.message, 'circle-exclamation');
+            }
+
+            if (res.data.redirect) {
+                location.href = res.data.redirect;
+            }
+        }).catch(function (error) {
+            snackbar(error.response.status, 'triangle-exclamation');
+        })
+    }
+    nameInput.value = nameInitialValue
+    nameSubmitBtn.disabled = false;
+
+});
+/* #Update Username# */

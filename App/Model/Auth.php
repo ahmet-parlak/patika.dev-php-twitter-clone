@@ -111,4 +111,26 @@ class Auth extends Model
         }
     }
 
+    public function updateName($name): bool
+    {
+        try {
+            $id = auth('id');
+            $query = $this->db->prepare("UPDATE users SET name = :name WHERE id = $id");
+            $query->execute(array('name' => $name));
+
+            if ($query->rowCount() > 0) {
+
+                $this->refreshSession();
+
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (\Throwable $th) {
+            print_r($th);
+            return false;
+        }
+    }
+
 }

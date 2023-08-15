@@ -18,7 +18,7 @@ $user = auth();
                     <div class="flex">
                         <img class="w-20 h-20 rounded-l-md border-gray-300" src="<?= $user->photo_url ?>" alt="pp"
                             onerror="this.src='<?= DEFAULT_PROFILE_PHOTO_URL ?>'">
-                        <input type="file"
+                        <input type="file" autocomplete="off"
                             class="w-full block px-5 py-5 rounded-none border text-center border-gray-300 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:cursor-pointer hover:file:bg-gray-50" />
                         <button
                             class="p-2 px-4 font-bold bg-gray-50 text-dark border border-l-0 border-gray-300 rounded-r-md hover:shadow-sm hover:shadow-gray-400 hover:bg-transparent"
@@ -34,7 +34,7 @@ $user = auth();
                             class="inline-flex w-12 justify-center bg-gray-50 items-center px-3 text-xl text-gray-900  border border-r-0 border-gray-300 rounded-l-md font-bold">
                             @
                         </span>
-                        <input type="text" id="username"
+                        <input type="text" id="username" autocomplete="off"
                             class="rounded-none bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5"
                             value="<?= $user->username ?>" required >
                         <button
@@ -51,7 +51,7 @@ $user = auth();
                             class="inline-flex w-12 justify-center bg-gray-50 items-center px-3 text-xl text-gray-900  border border-r-0 border-gray-300 rounded-l-md">
                             <i class="fa fa-user"></i>
                         </span>
-                        <input type="text" id="name"
+                        <input type="text" id="name" autocomplete="off"
                             class="rounded-none bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5"
                             value="<?= $user->name ?>">
                         <button
@@ -68,7 +68,7 @@ $user = auth();
                             class="inline-flex w-12 justify-center bg-gray-50 items-center px-3 text-xl text-gray-900  border border-r-0 border-gray-300 rounded-l-md">
                             <i class="fa-solid fa-quote-left"></i>
                         </span>
-                        <textarea id="about"
+                        <textarea id="about" autocomplete="off"
                             class="rounded-none bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5 resize-none"
                             rows="3"><?= $user->about ?></textarea>
                         <button
