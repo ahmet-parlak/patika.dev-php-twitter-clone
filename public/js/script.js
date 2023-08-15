@@ -57,23 +57,21 @@ function snackbar(message = 'Successful', faIcon = 'twitter') {
   const snackbarDiv = document.createElement('div');
   snackbarDiv.id = 'snackbar';
   snackbarDiv.role = 'alert';
-  snackbarDiv.classList.add("absolute", "left-1/2", "-translate-x-1/2", "top-1/3", "flex", "items-center", "w-full", "max-w-xs", "p-4", "space-x-4", "text-gray-500", "bg-white", "divide-x", "divide-gray-200", "rounded-lg", "shadow", "dark:text-gray-400", "dark:divide-gray-700", "space-x", "dark:bg-gray-800", "transition-all", "ease-in-out", "duration-500", "opacity-0");
+  snackbarDiv.classList.add("fixed",  "left-1/2", "-translate-x-1/2", "top-5", "flex", "items-center", "w-full", "max-w-xs", "p-4", "space-x-4", "text-gray-500", "bg-white", "divide-x", "divide-gray-200", "rounded-lg", "shadow", "space-x", "transition-all", "ease-in-out", "duration-500", "opacity-0");
 
   if (faIcon == 'twitter') {
-    snackbarDiv.innerHTML = `<i class="fa-brands fa-${faIcon} text-default"></i>`;
+    snackbarDiv.innerHTML = `<i class="fa-brands fa-${faIcon} text-xl text-default"></i>`;
   }else{
-    snackbarDiv.innerHTML = `<i class="fa-solid fa-${faIcon} text-default"></i>`;
+    snackbarDiv.innerHTML = `<i class="fa-solid fa-${faIcon} text-xl text-default"></i>`;
   }
 
   const snackbarContent = document.createElement('div');
-  snackbarContent.classList.add("pl-4", "text-sm", "font-normal");
+  snackbarContent.classList.add("pl-4", "text-base", "text-dark" , "font-medium");
   snackbarContent.textContent = message;
 
   snackbarDiv.appendChild(snackbarContent);
 
-  const alertsDiv = document.querySelector(".alerts");
-
-  alertsDiv.appendChild(snackbarDiv);
+  document.querySelector("body").appendChild(snackbarDiv);
 
 
   /* Show Snackbar */

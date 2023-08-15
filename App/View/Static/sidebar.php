@@ -25,7 +25,7 @@
             </div>
             <div class="user py-4 flex justify-end">
                 <div
-                    class="flex justify-between rounded-full px-4 py-1 gap-16 text-center align-middle hover:bg-gray-100">
+                    class="flex justify-between rounded-full px-4 py-1 gap-16 align-middle hover:bg-gray-100">
                     <a href="<?= route("user/") . auth('username') ?>"
                         class="text-dark flex gap-2 align-middle items-center">
                         <div class="w-11 h-11 bg-gray-300 rounded-full">
@@ -33,7 +33,7 @@
                                 onerror="this.src='<?= assets('images/profile/default.png') ?>'">
                         </div>
                         <div class="flex flex-col">
-                            <p class="text-lg font-bold capitalize">
+                            <p class="text-lg font-bold px-1">
                                 <?= auth('name') ?>
                             </p>
                             <p class="font-normal">
