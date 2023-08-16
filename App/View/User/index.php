@@ -19,14 +19,13 @@
                         <button
                             class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-blue-600"
                             title="Friendship Request" onclick="location.href='<?= route('profile') ?>'">
-                            Profile Settings<i class="fa-solid fa-user-gear ml-2"></i>
+                            Profile Settings<i class="fa-solid fa-user-gear ml-2"></i></i>
                         <?php } else { ?>
-                            <button
+                            <button action="<?= route('user/') . $user->username . '/friendship-request' ?>"
                                 class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-blue-600"
-                                title="Friendship Request">
+                                title="Friendship Request" onclick="friendshipRequest(this)">
                                 Send Request<i class="fa-solid fa-user-plus ml-2"></i>
                             <?php } ?>
-
                 </div>
             </div>
             <div class="footer p-3">
@@ -64,8 +63,8 @@
 
     <!-- Footer -->
     <?php
-
-    includeStaticFile('footer');
+    $scripts = ['js/user.js'];
+    includeStaticFile('footer', compact('scripts'));
     ?>
 </body>
 

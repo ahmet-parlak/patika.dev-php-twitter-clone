@@ -31,7 +31,7 @@ $router->post("/tweet", 'Controllers\TweetController@tweet'); //Tweet
 
 //User
 $router->get("/user/([a-zA-Z0-9_]+)", 'Controllers\UserController@index'); //User page
-
+$router->post('/user/([a-zA-Z0-9_]+)/friendship-request', 'Controllers\UserController@friendshipRequest'); //friendship request
 
 //Profile
 $router->get("/profile", 'Controllers\ProfileController@index'); //User page
@@ -40,6 +40,10 @@ $router->post("/profile/name", 'Controllers\ProfileController@updateName'); //Up
 $router->post("/profile/photo", 'Controllers\ProfileController@updatePhoto'); //Update photo
 $router->post("/profile/about", 'Controllers\ProfileController@updateAbout'); //Update about
 $router->post("/profile/password", 'Controllers\ProfileController@updatePassword'); //Update password
+
+
+
+
 
 
 //404
