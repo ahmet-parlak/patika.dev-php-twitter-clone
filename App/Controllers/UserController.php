@@ -26,14 +26,30 @@ class UserController extends Controller
     public function friendshipRequest($username)
     {
         $user = new User(username: $username); //if user not exist throws 404
-
         $friendshipsModel = new Friendship();
+
+        $data = $this->request->post();
+
+        if (isset($data['cancel_request']) && $data['cancel_request'] == 'true') {
+            $friendship = $friendshipsModel->friendshipQuery($user);
+
+            if ($friendship) {
+                $friendshipsModel->cancelFriendshipRequest($user) ?
+                    ResponseHelper::successResponse(message: 'Request cancelled.') :
+                    ResponseHelper::errorResponse();
+            } else {
+
+                ResponseHelper::errorResponse();
+            }
+        }
+
+
 
         $friendship = $friendshipsModel->friendshipRequest($user);
 
         if ($friendship == true) {
-            ResponseHelper::successResponse(message:'Friendship request sent');
-        }else{
+            ResponseHelper::successResponse(message: 'Friendship request sent');
+        } else {
             ResponseHelper::errorResponse();
         }
     }
