@@ -14,13 +14,43 @@ class UserController extends Controller
 
         try {
             $user = new User(username: $username);
+            $friendshipsModel = new Friendship();
+
+            $friendship = $friendshipsModel->friendshipQuery($user);
+
         } catch (NotFoundException $e) {
             $this->render('errors/404');
         }
 
-        $tweets = $user->getTweets();
+        if ($friendship) {
+            switch ($friendship->status) {
+                case 'pending':
+                    if ($friendship->sender_user_id == auth('id')) {
+                        $friendship = 'sent';
+                    } else {
+                        $friendship = 'received';
+                    }
+                    break;
 
-        $this->render('user/index', compact('user', 'tweets'));
+                case 'accepted':
+                    $friendship = 'friend';
+                    break;
+
+                case 'rejected':
+                    $friendship = 'rejected';
+                    break;
+            }
+        } else {
+            $friendship = null;
+        }
+
+        if ($friendship == 'friend') {
+            $tweets = $user->getTweets();
+        } else {
+            $tweets = [];
+        }
+
+        $this->render('user/index', compact('user', 'tweets', 'friendship'));
     }
 
     public function friendshipRequest($username)
@@ -30,6 +60,7 @@ class UserController extends Controller
 
         $data = $this->request->post();
 
+        /* If Cancel Friendship Request */
         if (isset($data['cancel_request']) && $data['cancel_request'] == 'true') {
             $friendship = $friendshipsModel->friendshipQuery($user);
 
@@ -44,7 +75,7 @@ class UserController extends Controller
         }
 
 
-
+        /* Create Friendship Request */
         $friendship = $friendshipsModel->friendshipRequest($user);
 
         if ($friendship == true) {

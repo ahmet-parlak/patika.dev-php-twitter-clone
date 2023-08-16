@@ -20,14 +20,72 @@
                             class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-blue-600"
                             title="Friendship Request" onclick="location.href='<?= route('profile') ?>'">
                             Profile Settings<i class="fa-solid fa-user-gear ml-2"></i></i>
-                        <?php } else { ?>
-                            <button action="<?= route('user/') . $user->username . '/friendship-request' ?>"
-                                class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-blue-600"
-                                title="Friendship Request" onclick="friendshipRequest(this)">
-                                Send Request<i class="fa-solid fa-user-plus ml-2"></i>
-                            <?php } ?>
+                        </button>
+                    <?php } else { ?>
+                        <?php switch ($friendship) {
+                            case 'sent':
+                                ?>
+                                <button action="<?= route('user/') . $user->username . '/friendship-request' ?>"
+                                    class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-blue-600"
+                                    title="Cancel Friendship Request" onclick="cancelFriendshipRequest(this)">
+                                    Cancel<i class="fa-solid fa-user-minus ml-2"></i>
+                                </button>
+                                <?php
+                                break;
+
+                            case 'received':
+                                ?>
+                                <div class="flex justify-end items-center gap-2">
+                                    <p>Friendship Request Received</p>
+                                    <div class="flex bg-default rounded-full"><button
+                                            action="<?= route('user/') . $user->username . '/friendship-request' ?>"
+                                            class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-green-500"
+                                            title="Accept Friendship Request" onclick="acceptFriendshipRequest(this)">
+                                            <i class="fa-solid fa-user-check"></i>
+                                        </button>
+                                        <button action="<?= route('user/') . $user->username . '/friendship-request' ?>"
+                                            class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-red-500"
+                                            title="Reject Friendship Request" onclick="rejectFriendshipRequest(this)">
+                                            <i class="fa-solid fa-user-xmark"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <?php
+                                break;
+
+                            case 'friend':
+                                ?>
+                                <button action="<?= route('user/') . $user->username . '/friendship-request' ?>"
+                                    class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-red-500"
+                                    title="Unfriend" onclick="unfriend(this)">
+                                    Friend<i class="fa-solid fa-user-group ml-2"></i>
+                                </button>
+                                <?php
+                                break;
+
+                            case 'rejected':
+                                ?>
+                                <button action="<?= route('user/') . $user->username . '/friendship-request' ?>"
+                                    class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-blue-600"
+                                    title="Friendship Request" onclick="">
+                                    Request Rejected<i class="fa-solid fa-user-xmark ml-2"></i>
+                                </button>
+                                <?php
+                                break;
+
+                            default: ?>
+                                <button action="<?= route('user/') . $user->username . '/friendship-request' ?>"
+                                    class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-blue-600"
+                                    title="Friendship Request" onclick="friendshipRequest(this)">
+                                    Send Request<i class="fa-solid fa-user-plus ml-2"></i>
+                                </button>
+                                <?php
+                                break;
+                        } ?>
+                    <?php } ?>
                 </div>
             </div>
+
             <div class="footer p-3">
                 <div class="name flex flex-col">
                     <p class="text-3xl font-bold p-1">
@@ -58,6 +116,15 @@
                 includeStaticFile('widgets/tweet', compact('tweet', 'user'));
             }
             ?>
+
+            <?php
+            if ($friendship != 'friend') { ?>
+                <div class="text-center border-t pt-2">
+                    Only friends can view the user's tweets.
+                </div>
+            <?php } elseif(count($tweets) == 0) { ?>
+                <div class="text-center border-t pt-2">User has not tweeted yet.</div>
+            <?php } ?>
         </div>
     </div>
 
