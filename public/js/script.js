@@ -1,10 +1,6 @@
 /* Loading */
-function loadingOn() {
-  document.querySelector(".loading").classList.remove('invisible');
-}
-
-function loadingOff() {
-  document.querySelector(".loading").classList.add('invisible');
+function loadingToggle(elementClass = 'body') {
+  document.querySelector(`${elementClass} .loading`).classList.toggle('invisible');
 }
 /* #Loading# */
 
@@ -57,16 +53,16 @@ function snackbar(message = 'Successful', faIcon = 'twitter') {
   const snackbarDiv = document.createElement('div');
   snackbarDiv.id = 'snackbar';
   snackbarDiv.role = 'alert';
-  snackbarDiv.classList.add("fixed",  "left-1/2", "-translate-x-1/2", "top-5", "flex", "items-center", "w-full", "max-w-xs", "p-4", "space-x-4", "text-gray-500", "bg-white", "divide-x", "divide-gray-200", "rounded-lg", "shadow", "space-x", "transition-all", "ease-in-out", "duration-500", "opacity-0");
+  snackbarDiv.classList.add("fixed", "left-1/2", "-translate-x-1/2", "top-5", "flex", "items-center", "w-full", "max-w-xs", "p-4", "space-x-4", "text-gray-500", "bg-white", "divide-x", "divide-gray-200", "rounded-lg", "shadow", "space-x", "transition-all", "ease-in-out", "duration-500", "opacity-0");
 
   if (faIcon == 'twitter') {
     snackbarDiv.innerHTML = `<i class="fa-brands fa-${faIcon} text-xl text-default"></i>`;
-  }else{
+  } else {
     snackbarDiv.innerHTML = `<i class="fa-solid fa-${faIcon} text-xl text-default"></i>`;
   }
 
   const snackbarContent = document.createElement('div');
-  snackbarContent.classList.add("pl-4", "text-base", "text-dark" , "font-medium");
+  snackbarContent.classList.add("pl-4", "text-base", "text-dark", "font-medium");
   snackbarContent.textContent = message;
 
   snackbarDiv.appendChild(snackbarContent);
@@ -94,7 +90,7 @@ function snackbar(message = 'Successful', faIcon = 'twitter') {
 /* #Snackbar# */
 
 /* Add Tweet */
-function addTweet(tweet, toTop = false) {
+async function addTweet(tweet, toTop = false) {
   const tweets = document.querySelector(".tweets");  //tweets parent div
 
   const parent = document.createElement('div');  //tweet div
@@ -108,7 +104,8 @@ function addTweet(tweet, toTop = false) {
 
   const userPhoto = document.createElement('img');  //photo div
   userPhoto.classList.add("w-12", "h-12", "bg-gray-300", "rounded-full");
-  userPhoto.src = tweet.user.photo_url
+  userPhoto.src = tweet.user.photo_url ?? '';
+  userPhoto.onerror = (e) => { e.target.src = 'public/images/profile/default.png' };
   parent.appendChild(userPhoto);  //append photo to user parent
 
 
@@ -141,17 +138,31 @@ function addTweet(tweet, toTop = false) {
   userParent.appendChild(tweetContent);
 
   /* Show Tweet */
-  setTimeout(() => {
-    parent.classList.remove('opacity-0');
-  }, 0);
+  await timeout();
+  parent.classList.remove('opacity-0');
 }
 /* #Add Tweet# */
+
+async function addTweetFromData(data) {
+  const tweet = {
+    content: data.content,
+    user: {
+      name: data.name,
+      username: data.username,
+      photo_url: data.photo_url,
+      profile_url: data.profile_url
+    },
+    date: data.date,
+  };
+
+  addTweet(tweet);
+}
 
 
 /* Log Out */
 function logout(e) {
   const actionURL = e.getAttribute('action');
-  loadingOn();
+  loadingToggle('.log-out');
   e.disabled = true;
   axios.post(actionURL).then(res => {
     //toast(res.data.status, res.data.message);
@@ -159,7 +170,12 @@ function logout(e) {
       window.location.href = res.data.redirect;
     }
     e.disabled = false;
-    loadingOff();
+    loadingToggle('.log-out');
   });
 }
 /* #Log Out# */
+
+
+function timeout(ms = 0) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

@@ -8,11 +8,15 @@ $router->before('GET|POST', '/login', 'Middlewares\AuthMiddleware@notAuth'); //m
 $router->before('GET|POST', '/register', 'Middlewares\AuthMiddleware@notAuth'); //must be logged out to access the registration page
 $router->before('GET|POST', '/user/.*', 'Middlewares\AuthMiddleware@auth'); //must be authenticated to access the user page 
 $router->before('GET|POST', '/profile', 'Middlewares\AuthMiddleware@auth'); //must be authenticated to access the profile page 
-
+$router->before('GET|POST', '/friends', 'Middlewares\AuthMiddleware@auth'); //must be authenticated to access the friends feed 
+$router->before('GET|POST', '/discover', 'Middlewares\AuthMiddleware@auth'); //must be authenticated to access the discover feed
 
 
 //Home
 $router->get("/", 'Controllers\HomeController@index'); //Home Page
+
+$router->post("/friends", 'Controllers\HomeController@friends'); //Friends feed
+$router->post("/discover", 'Controllers\HomeController@discover'); //Discover feed
 
 
 //Authorization
