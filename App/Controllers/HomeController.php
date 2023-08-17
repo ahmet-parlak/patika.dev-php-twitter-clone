@@ -9,7 +9,9 @@ class HomeController extends Controller
     public function index()
     {
         $tweetModel = new Tweet();
-        $discover = $tweetModel->getAllTweets();
-        $this->render('home/index', compact('discover'));
+        //$discover = $tweetModel->getAllTweets();
+        $friends = $tweetModel->getFriendsTweets();
+        
+        $this->render('home/index', compact('friends')); 
     }
 }

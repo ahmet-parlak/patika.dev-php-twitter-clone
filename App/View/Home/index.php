@@ -10,7 +10,6 @@
         </div>
 
         <div class="flex">
-
             <button id="discover" action="<?= route('discover') ?>" onclick="loadFlow(this)"
                 class="hover:bg-gray-200 py-3 flex-auto  px-2 border-default font-bold text-lg text-dark">
                 Discover
@@ -46,7 +45,7 @@
         <!-- Tweets -->
         <div class="tweets mt-2 space-y-4">
             <?php
-            foreach ($discover as $tweet) {
+            foreach ($friends as $tweet) {
                 includeStaticFile('widgets/tweet', compact('tweet'));
             }
             ?>

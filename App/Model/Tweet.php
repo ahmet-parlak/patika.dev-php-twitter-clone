@@ -44,4 +44,15 @@ class Tweet extends Model
         $stmt = "SELECT t.content, t.created_at as date, u.name, u.username, u.photo_url FROM tweets t JOIN users u ON u.id = t.user_id ORDER BY t.created_at DESC";
         return $this->db->fetchAll($stmt, \PDO::FETCH_OBJ);
     }
+
+    public function getFriendsTweets()
+    {
+        $friendshipModel = new Friendship();
+
+        $friendsQuery = $friendshipModel->getFriends(getSQL: true);
+
+        $stmt = $this->db->prepare("SELECT friends.*, t.content, t.created_at as date FROM ($friendsQuery) friends JOIN tweets t on friends.user_id = t.user_id ORDER BY t.created_at DESC");
+        $stmt->execute(['auth_id' => auth('id')]);
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
 }
