@@ -60,23 +60,44 @@ class UserController extends Controller
 
         $data = $this->request->post();
 
-        /* If Cancel Friendship Request */
-        if (isset($data['cancel_request']) && $data['cancel_request'] == 'true') {
-            $friendship = $friendshipsModel->friendshipQuery($user);
+        /* If Update Friendship Request */
+        if (isset($data['request'])) {
+            $request = $data['request'];
 
-            if ($friendship) {
-                $friendshipsModel->cancelFriendshipRequest($user) ?
-                    ResponseHelper::successResponse(message: 'Request cancelled.') :
+            switch ($request) {
+                case 'cancel':
+                    $friendshipsModel->cancelRequest($user) ?
+                        ResponseHelper::successResponse(message: 'Request cancelled.') :
+                        ResponseHelper::errorResponse();
+                    break;
+
+                case 'accept':
+                    $friendshipsModel->acceptRequest($user) ?
+                        ResponseHelper::successResponse(message: 'Request accepted.', redirect: route("user/{$user->username}")) :
+                        ResponseHelper::errorResponse();
+                    break;
+
+                case 'reject':
+                    $friendshipsModel->rejectRequest($user) ?
+                        ResponseHelper::successResponse(message: 'Request rejected.', redirect: route("user/{$user->username}")) :
+                        ResponseHelper::errorResponse();
+                    break;
+
+                case 'unfriend':
+                    $friendshipsModel->unfriend($user) ?
+                        ResponseHelper::successResponse(message: 'Unfriended.', redirect: route("user/{$user->username}")) :
+                        ResponseHelper::errorResponse();
+                    break;
+
+                default:
                     ResponseHelper::errorResponse();
-            } else {
-
-                ResponseHelper::errorResponse();
+                    break;
             }
         }
 
 
         /* Create Friendship Request */
-        $friendship = $friendshipsModel->friendshipRequest($user);
+        $friendship = $friendshipsModel->createRequest($user);
 
         if ($friendship == true) {
             ResponseHelper::successResponse(message: 'Friendship request sent');
