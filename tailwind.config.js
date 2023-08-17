@@ -41,7 +41,18 @@ module.exports = {
         'h2': { fontSize: theme('fontSize.xl'), fontWeight: 'bold' },
         'h3': { fontSize: theme('fontSize.lg'), fontWeight: 'bold' },
       })
-    })
+    }),
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.flow-active': {
+          'border-bottom-width': '2px',
+          // Diğer border özellikleri buraya eklenebilir
+        },
+      };
+
+      addUtilities(newUtilities, ['responsive', 'hover', 'focus']);
+    },
   ],
+
 }
 

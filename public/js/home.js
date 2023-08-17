@@ -1,3 +1,15 @@
+/* Load Flow */
+function loadFlow(element) {
+    const discoverBtn = document.querySelector("#discover");
+    const friendsBtn = document.querySelector("#friends");
+    discoverBtn.classList.toggle('flow-active');
+    friendsBtn.classList.toggle('flow-active');
+    const actionURL = element.getAttribute('action');
+
+}
+/* #Load Flow# */
+
+
 /* Post Tweet */
 const tweetForm = document.getElementById('tweet-form');
 const submitBtn = document.querySelector("#tweet-form [type='submit']");
@@ -15,7 +27,7 @@ tweetForm.addEventListener('submit', (e) => {
         //post
         axios.post(actionURL, formData).then(res => {
             snackbar(res.data.message);
-            if(res.data.status == 'success'){
+            if (res.data.status == 'success') {
                 addTweet(res.data.data, true);
             }
         }).catch(function (error) {

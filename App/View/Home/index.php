@@ -5,9 +5,26 @@
 
     <!-- Content -->
     <div class="container w-598 border-r">
-        <div class="alerts relative h-3"></div>
+        <div class="px-4 py-2 font-bold text-xl">
+            Home
+        </div>
+
+        <div class="flex">
+
+            <button id="discover" action="<?= route('discover') ?>" onclick="loadFlow(this)"
+                class="hover:bg-gray-200 py-3 flex-auto  px-2 border-default font-bold text-lg text-dark">
+                Discover
+            </button>
+
+            <button id="friends" action="<?= route('friends') ?>" onclick="loadFlow(this)"
+                class="hover:bg-gray-200 py-3 flex-auto  px-2 flow-active border-default font-bold text-lg text-dark">
+                Friends
+            </button>
+
+        </div>
+
         <!-- Tweet Box -->
-        <div class="mt-8 p-4 border-t">
+        <div class="p-4 border-t">
             <form id="tweet-form" action="<?= route('tweet') ?>">
                 <textarea id="tweet_content" class="w-full p-2 text-gray-700 resize-none outline-0 text-lg"
                     placeholder="What's happening?" oninput="charCount(this)" minlength="1" maxlength="180"
