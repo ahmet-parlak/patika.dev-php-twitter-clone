@@ -25,18 +25,21 @@
                         <?php switch ($friendship) {
                             case 'sent':
                                 ?>
-                                <button action="<?= route('user/') . $user->username . '/friendship-request' ?>"
-                                    class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-blue-600"
-                                    title="Cancel Friendship Request" onclick="cancelFriendshipRequest(this)">
-                                    Cancel<i class="fa-solid fa-user-minus ml-2"></i>
-                                </button>
+                                <div class="flex justify-end items-center gap-2">
+                                    <span class="status-i text-sm">You sent a request</span>
+                                    <button action="<?= route('user/') . $user->username . '/friendship-request' ?>"
+                                        class="self-center bg-default h-min hover:bg-red-500 text-white py-2 px-5 rounded-full font-bold hover:shadow-xl"
+                                        title="Cancel" onclick="cancelFriendshipRequest(this)">
+                                        Cancel<i class="fa-solid fa-user-minus ml-2"></i>
+                                    </button>
+                                </div>
                                 <?php
                                 break;
 
                             case 'received':
                                 ?>
                                 <div class="flex justify-end items-center gap-2">
-                                    <p>Friendship Request Received</p>
+                                    <span class="text-sm">You received a request</span>
                                     <div class="flex bg-default rounded-full"><button
                                             action="<?= route('user/') . $user->username . '/friendship-request' ?>"
                                             class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-green-500"
@@ -56,9 +59,9 @@
                             case 'friend':
                                 ?>
                                 <button action="<?= route('user/') . $user->username . '/friendship-request' ?>"
-                                    class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-red-500"
+                                    class="self-center bg-default h-min hover:bg-red-500 text-white py-2 px-5 rounded-full font-bold hover:shadow-xl"
                                     title="Unfriend" onclick="unfriend(this)">
-                                    Friend<i class="fa-solid fa-user-group ml-2"></i>
+                                    Unfriend<i class="fa-solid fa-user-minus ml-2"></i>
                                 </button>
                                 <?php
                                 break;
