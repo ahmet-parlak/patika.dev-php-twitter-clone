@@ -9,7 +9,7 @@
                     <i class="fa-brands fa-twitter text-default text-4xl "></i>
                 </a>
             </div>
-            <div class="flex justify-end pr-2 mt-2">
+            <div class="flex justify-end pr-2 mt-0">
                 <div class="top  w-full">
                     <div class="home my-6 flex justify-end text-dark align-middle items-center">
                         <a href="<?= route() ?>"
@@ -72,11 +72,15 @@
                             </div>
                         </a>
                         <div class="log-out flex">
-                            <?php
-                            $color = 'default';
-                            includeStaticFile('widgets/loading', compact('color'));
-                            ?>
-                            <button action="<?= route('logout') ?>" onclick="logout(this)" class="text-dark pl-4">
+
+                            <button action="<?= route('logout') ?>" onclick="logout(this)"
+                                class="flex justify-center self-center text-dark pl-4">
+                                <div class="logout-loading self-center">
+                                    <?php
+                                    $color = 'default';
+                                    includeStaticFile('widgets/loading', compact('color'));
+                                    ?>
+                                </div>
                                 <i class="fa-solid fa-arrow-right-from-bracket text-2xl rounded-full p-2  hover:bg-gray-300 hover:text-dark"
                                     title="log out"></i>
                             </button>
