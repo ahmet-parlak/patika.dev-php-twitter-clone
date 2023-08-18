@@ -65,11 +65,21 @@
 
                             case 'rejected':
                                 ?>
-                                <button action="<?= route('user/') . $user->username . '/friendship-request' ?>"
-                                    class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-blue-600"
-                                    title="Friendship Request" onclick="">
-                                    Request Rejected<i class="fa-solid fa-user-xmark ml-2"></i>
-                                </button>
+                                <div class="flex justify-end items-center gap-2">
+                                    <span class="text-sm">You rejected the request</span>
+                                    <div class="flex bg-default rounded-full"><button
+                                            action="<?= route('user/') . $user->username . '/friendship-request' ?>"
+                                            class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-green-500"
+                                            title="Accept Friendship Request" onclick="acceptFriendshipRequest(this)">
+                                            <i class="fa-solid fa-user-check"></i>
+                                        </button>
+                                        <button action="<?= route('user/') . $user->username . '/friendship-request' ?>"
+                                            class="bg-default text-white py-2 px-5 rounded-full font-bold hover:shadow-xl hover:bg-red-500"
+                                            title="Remove" onclick="removeFriendshipRequest(this)">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
                                 <?php
                                 break;
 
@@ -122,7 +132,7 @@
                 <div class="text-center border-t pt-2">
                     Only friends can view the user's tweets.
                 </div>
-            <?php } elseif(count($tweets) == 0) { ?>
+            <?php } elseif (count($tweets) == 0) { ?>
                 <div class="text-center border-t pt-2">User has not tweeted yet.</div>
             <?php } ?>
         </div>

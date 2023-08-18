@@ -67,25 +67,31 @@ class UserController extends Controller
             switch ($request) {
                 case 'cancel':
                     $friendshipsModel->cancelRequest($user) ?
-                        ResponseHelper::successResponse(message: 'Request cancelled.') :
+                        ResponseHelper::successResponse(message: 'Request cancelled') :
                         ResponseHelper::errorResponse();
                     break;
 
                 case 'accept':
                     $friendshipsModel->acceptRequest($user) ?
-                        ResponseHelper::successResponse(message: 'Request accepted.', redirect: route("user/{$user->username}")) :
+                        ResponseHelper::successResponse(message: 'Request accepted', redirect: route("user/{$user->username}")) :
                         ResponseHelper::errorResponse();
                     break;
 
                 case 'reject':
                     $friendshipsModel->rejectRequest($user) ?
-                        ResponseHelper::successResponse(message: 'Request rejected.', redirect: route("user/{$user->username}")) :
+                        ResponseHelper::successResponse(message: 'Request rejected', redirect: route("user/{$user->username}")) :
                         ResponseHelper::errorResponse();
                     break;
 
                 case 'unfriend':
                     $friendshipsModel->unfriend($user) ?
-                        ResponseHelper::successResponse(message: 'Unfriended.', redirect: route("user/{$user->username}")) :
+                        ResponseHelper::successResponse(message: 'Unfriended', redirect: route("user/{$user->username}")) :
+                        ResponseHelper::errorResponse();
+                    break;
+
+                case 'remove':
+                    $friendshipsModel->removeRequest($user) ?
+                        ResponseHelper::successResponse(message: 'Request removed', redirect: route("user/{$user->username}")) :
                         ResponseHelper::errorResponse();
                     break;
 

@@ -62,7 +62,23 @@ class Friendship extends Model
         $friendship = $this->friendQuery($user);
         if ($friendship) //if friendship is exists
         {
-            return $this->db->delete("friendships", ['receiver_user_id' => auth('id'), 'sender_user_id' => $user->id]);
+            $reciever_user_id = $friendship->receiver_user_id;
+            $sender_user_id = $friendship->sender_user_id;
+            return $this->db->delete("friendships", ['receiver_user_id' => $reciever_user_id, 'sender_user_id' => $sender_user_id]);
+        } else {
+            return false;
+        }
+    }
+    
+
+    public function removeRequest(User $user)
+    {
+        $friendship = $this->friendshipQuery($user);
+        if ($friendship) //if friendship is exists
+        {
+            $reciever_user_id = $friendship->receiver_user_id;
+            $sender_user_id = $friendship->sender_user_id;
+            return $this->db->delete("friendships", ['receiver_user_id' => $reciever_user_id, 'sender_user_id' => $sender_user_id]);
         } else {
             return false;
         }
