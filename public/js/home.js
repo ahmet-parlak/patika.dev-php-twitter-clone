@@ -1,3 +1,10 @@
+window.onload = function () {
+    if (window.location.hash === "#discover") {
+        document.querySelector("#discover").click();
+    }
+};
+
+
 /* Load Flow */
 function loadFlow(element) {
     const discoverBtn = document.querySelector("#discover");
@@ -30,7 +37,8 @@ function loadFlow(element) {
             loadingToggle('.tweets-loading');
             discoverBtn.disabled = false;
             friendsBtn.disabled = false;
-
+            const anchor = "#" + element.getAttribute('id');
+            window.history.pushState("", "", anchor);
         }
     }).catch(function (error) {
         snackbar(error.response?.message ?? error);

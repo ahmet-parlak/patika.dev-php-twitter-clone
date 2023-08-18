@@ -41,7 +41,7 @@ class Tweet extends Model
 
     public function getAllTweets()
     {
-        $stmt = "SELECT t.content, t.created_at as date, u.name, u.username, u.photo_url FROM tweets t JOIN users u ON u.id = t.user_id ORDER BY t.created_at DESC";
+        $stmt = "SELECT t.content, t.created_at as date, u.name, u.username, u.photo_url, CONCAT('http://localhost/patika.dev/php/twitter-clone/user/',u.username) as profile_url FROM tweets t JOIN users u ON u.id = t.user_id ORDER BY t.created_at DESC";
         return $this->db->fetchAll($stmt, \PDO::FETCH_OBJ);
     }
 
@@ -55,7 +55,7 @@ class Tweet extends Model
         $userId = auth('id');
         $userTweetsQ = "SELECT user.username, user.name, twt.content, twt.created_at as date FROM users user JOIN tweets twt on user.id = twt.user_id WHERE user.id = $userId";
 
-        $stmt = $this->db->prepare("SELECT * FROM ($friendsTweetsQ UNION $userTweetsQ) twts ORDER BY twts.date DESC");
+        $stmt = $this->db->prepare("SELECT *, CONCAT('http://localhost/patika.dev/php/twitter-clone/user/',username) as profile_url FROM ($friendsTweetsQ UNION $userTweetsQ) twts ORDER BY twts.date DESC");
         $stmt->execute(['auth_id' => auth('id')]);
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
