@@ -118,6 +118,23 @@ class Friendship extends Model
         $q = $this->db->prepare($q);
         $q->execute(['auth_id' => auth('id')]);
 
-        return $q->fetchObject();
+        return $q->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function getRequests(bool $getSQL = false)
+    {
+        $q1 = "SELECT f.receiver_user_id AS user_id, 'receiver' AS relationship_type, f.status, f.created_date AS date FROM friendships f WHERE f.sender_user_id = :auth_id AND f.status != 'accepted'";
+
+        $q2 = "SELECT fr.sender_user_id AS user_id, 'sender' AS relationship_type, fr.status, fr.created_date AS date FROM friendships fr WHERE fr.receiver_user_id = :auth_id AND fr.status != 'accepted'";
+
+        $q = "SELECT fri.*, u.username, u.name, u.photo_url FROM ($q1 UNION $q2) fri JOIN users u ON u.id = fri.user_id";
+
+        if ($getSQL) //if query is requested
+            return $q;
+
+        $q = $this->db->prepare($q);
+        $q->execute(['auth_id' => auth('id')]);
+
+        return $q->fetchAll(\PDO::FETCH_OBJ);
     }
 }

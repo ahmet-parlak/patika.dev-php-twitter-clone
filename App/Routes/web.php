@@ -46,7 +46,9 @@ $router->post("/profile/about", 'Controllers\ProfileController@updateAbout'); //
 $router->post("/profile/password", 'Controllers\ProfileController@updatePassword'); //Update password
 
 
-
+//Friends
+$router->get("/friends", 'Controllers\FriendsController@index'); //Friends Page
+$router->get("/friends/requests", 'Controllers\FriendsController@requests'); //Requests Page
 
 
 
