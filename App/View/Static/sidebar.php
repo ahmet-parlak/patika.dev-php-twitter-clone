@@ -13,8 +13,8 @@
                 <div class="top  w-full">
                     <div class="home my-6 flex justify-end text-dark align-middle items-center">
                         <a href="<?= route() ?>"
-                            class="flex w-full rounded-full px-4 py-2 gap-10 text-center align-middle hover:bg-gray-100 cursor-pointer">
-                            <div class="w-11 h-11 text-3xl">
+                            class="flex w-full rounded-full px-4 py-2 gap-6 text-center align-middle hover:bg-gray-100 cursor-pointer">
+                            <div class="w-11 h-11 text-2xl">
                                 <i class="fa-solid fa-house align-middle"></i>
                             </div>
                             <div class="text-xl font-bold self-center">
@@ -24,8 +24,8 @@
                     </div>
                     <div class="friendships my-6 flex justify-end text-dark align-middle items-center">
                         <a href="<?= route('friends') ?>"
-                            class="flex w-full rounded-full px-4 py-2 gap-10 text-center align-middle hover:bg-gray-100 cursor-pointer">
-                            <div class="w-11 h-11 text-3xl">
+                            class="flex w-full rounded-full px-4 py-2 gap-6 text-center align-middle hover:bg-gray-100 cursor-pointer">
+                            <div class="w-11 h-11 text-2xl">
                                 <i class="fa-solid fa-users align-middle"></i>
                             </div>
                             <div class="text-xl font-bold self-center">
@@ -44,8 +44,8 @@
                 <div class="user my-8 flex justify-end">
                     <div
                         class="flex justify-between w-full rounded-full px-4 py-2 text-center align-middle hover:bg-gray-100">
-                        <a href="<?= route("profile") ?>" class="text-dark flex gap-8 align-middle items-center">
-                            <div class="w-11 h-11 text-3xl">
+                        <a href="<?= route("profile") ?>" class="text-dark flex gap-4 align-middle items-center">
+                            <div class="w-11 h-11 text-2xl">
                                 <i class="fa-solid fa-user-gear align-middle"></i>
                             </div>
                             <div class="text-xl font-bold">
