@@ -103,7 +103,7 @@ async function addTweet(tweet, toTop = false) {
   }
 
   const userPhoto = document.createElement('img');  //photo div
-  userPhoto.classList.add("w-12", "h-12", "bg-gray-300", "rounded-full");
+  userPhoto.classList.add("w-11", "h-11", "bg-gray-300", "rounded-full");
   userPhoto.src = tweet.user.photo_url ?? '';
   userPhoto.onerror = (e) => { e.target.src = 'public/images/profile/default.png' };
   parent.appendChild(userPhoto);  //append photo to user parent
