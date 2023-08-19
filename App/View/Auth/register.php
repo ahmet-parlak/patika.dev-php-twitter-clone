@@ -13,12 +13,16 @@ includeStaticFile('header', compact('title'));
             <!-- Login Box -->
             <form id="sign-up-form" action="<?= route('register') ?>">
                 <div class="flex flex-col gap-8 text-center mt-8 p-14 px-24 border rounded-lg shadow-xl text-base">
-                    <h1>Create your account</h1>
+                    <div class="brand">
+                        <i class="fa-brands fa-twitter text-5xl mb-4"></i>
+                        <h1>Create Your Account</h1>
+                    </div>
+
                     <div class="inputs flex flex-col gap-5 text-center mt-7 mb-4">
                         <input id="username" class="p-3 border-2 rounded-sm text-lg" type="text" name="username"
-                            placeholder="@username" autocomplete="off" required >
+                            placeholder="@username" autocomplete="off" required>
                         <input id="name" class="p-3 border-2 rounded-sm text-lg" type="text" name="name"
-                            placeholder="name" autocomplete="off" required >
+                            placeholder="name" autocomplete="off" required>
                         <input id="password" class="p-3 border-2 rounded-sm text-lg" type="password" name="password"
                             placeholder="password" required>
                         <input id="confirm_password" class="p-3 border-2 rounded-sm text-lg" type="password"

@@ -10,8 +10,12 @@ includeStaticFile('header', compact('title'));
         <div class="container mx-auto w-598">
             <!-- Login Box -->
             <form id="login-form" action="<?= route('login') ?>">
-                <div class="flex flex-col gap-8 text-center mt-8 p-14 px-24 border rounded-lg shadow-xl text-base">
-                    <h1>Login to Tweet App</h1>
+                <div class="flex flex-col gap-7 text-center mt-8 p-14 px-24 border rounded-lg shadow-xl text-base">
+                    <div class="brand">
+                        <i class="fa-brands fa-twitter text-5xl mb-4"></i>
+                        <h1>Login to Tweet App</h1>
+                    </div>
+
                     <div class="inputs flex flex-col gap-5 text-center mt-7 mb-4">
                         <input id="username" class="p-4 border-2 rounded-sm text-lg" type="text" name="username"
                             placeholder="@username" autocomplete="off" required>

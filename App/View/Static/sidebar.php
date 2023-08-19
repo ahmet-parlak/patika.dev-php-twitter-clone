@@ -1,5 +1,5 @@
 <div class="sidebar h-screen w-1/3 sticky top-0 flex justify-end border-r">
-    <div class="w-1/2 h-full flex flex-col justify-between">
+    <div class="h-full flex flex-col justify-between">
         <div class="header">
             <div class="banner flex justify-between  p-4">
                 <a href="<?= route() ?>">
