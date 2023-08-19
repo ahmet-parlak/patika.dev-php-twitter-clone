@@ -66,9 +66,9 @@ class AuthController extends Controller
 
         if ($status) //register control
         {
-            ResponseHelper::successResponse(message: 'You have registered. You will be redirected to the home page...', redirect: route());
+            ResponseHelper::successResponse(message: 'You have successfully registered', redirect: route());
         } else {
-            ResponseHelper::errorResponse(message: 'An unexpected error occurred. Please try again.');
+            ResponseHelper::errorResponse(message: 'An unexpected error occurred. Please try again');
         }
 
     }
@@ -95,16 +95,16 @@ class AuthController extends Controller
 
         if ($status) //login control
         {
-            ResponseHelper::successResponse(message: 'Login successful. You are redirected to the home page...', redirect: route());
+            ResponseHelper::successResponse(message: 'Login successful', redirect: route());
         } else {
-            ResponseHelper::errorResponse(message: 'Username and password do not match.');
+            ResponseHelper::errorResponse(message: 'Username and password do not match!');
         }
     }
 
     public function logout()
     {
         \Core\Session::removeSession();
-        ResponseHelper::successResponse(message: 'Logout successful.', redirect: route());
+        ResponseHelper::successResponse(message: 'Logout successful', redirect: route('login'));
     }
 
 }
