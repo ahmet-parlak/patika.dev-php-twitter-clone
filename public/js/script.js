@@ -214,10 +214,10 @@ function convertDate(date = "2023-08-19 15:23:14") {
 
   // Formatted date printout
   const timeZone = 'en-US';
-  const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: "h24" };
+  const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: "h23" };
   const longDate = new Intl.DateTimeFormat(timeZone, options).format(dateFromServer);
 
-  const shortOpt = { month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: "h24" };
+  const shortOpt = { month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: "h23" };
   const shortDate = new Intl.DateTimeFormat(timeZone, shortOpt).format(dateFromServer);
 
   const formattedDate = {
