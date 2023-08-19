@@ -19,7 +19,7 @@ signupForm.addEventListener('submit', (e) => {
 
     submitBtn.disabled = true; //prevent consecutive submission of the form 
     removeToast();
-    loadingOn();
+    loadingToggle();
 
     //post
     axios.post(actionURL, formData).then(res => {
@@ -28,7 +28,7 @@ signupForm.addEventListener('submit', (e) => {
             window.location.href = res.data.redirect;
         }
         submitBtn.disabled = false;
-        loadingOff();
+        loadingToggle();
     });
 
 });

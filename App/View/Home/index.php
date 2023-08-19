@@ -50,6 +50,13 @@
 
         <!-- Tweets -->
         <div class="tweets space-y-4">
+            <?php
+            if (count($friends) == 0) { ?>
+                <div class="info-box border-t text-center py-4">
+                    <p>There is no tweet to show here yet.</p>
+                    <p class="mt-2">Check out the Discover feed to view recent tweets and discover new users.</p>
+                </div>
+            <?php } ?>
 
             <?php
             foreach ($friends as $tweet) {
