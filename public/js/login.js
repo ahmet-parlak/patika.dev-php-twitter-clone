@@ -19,7 +19,7 @@ loginForm.addEventListener('submit', (e) => {
     axios.post(actionURL, formData).then(res => {
         toast(res.data.status, res.data.message);
         if (res.data.redirect) {
-            window.location.href = res.data.redirect;
+            window.location.href = res.data.redirect + `?status=${res.data.status}&message=${res.data.message}`;
         }
         submitBtn.disabled = false;
         loadingToggle();

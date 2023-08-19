@@ -15,15 +15,21 @@ usernameForm.addEventListener('submit', (e) => {
         //post
         axios.post(actionURL, formData).then(res => {
             if (res.data.status == 'success') {
-                snackbar(res.data.message, 'check');
-                usernameSubmitBtn.disabled = false;
+                if (res.data.redirect) {
+                    location.href = res.data.redirect + `?status=${res.data.status}&message=${res.data.message}&ic=check`;
+                } else {
+                    snackbar(res.data.message, 'check');
+                    usernameSubmitBtn.disabled = false;
+                }
+
             } else {
+                if (res.data.redirect) {
+                    location.href = res.data.redirect + `?status=${res.data.status}&message=${res.data.message}`;
+                }
                 snackbar(res.data.message, 'circle-exclamation');
             }
 
-            if (res.data.redirect) {
-                location.href = res.data.redirect;
-            }
+
         }).catch(function (error) {
             snackbar(error.response.status, 'triangle-exclamation');
         })
@@ -52,15 +58,22 @@ nameForm.addEventListener('submit', (e) => {
         //post
         axios.post(actionURL, formData).then(res => {
             if (res.data.status == 'success') {
-                snackbar(res.data.message, 'check');
-                nameSubmitBtn.disabled = false;
+                if (res.data.redirect) {
+                    location.href = res.data.redirect + `?status=${res.data.status}&message=${res.data.message}&ic=check`;
+                } else {
+                    snackbar(res.data.message, 'check');
+                    nameSubmitBtn.disabled = false;
+                }
+
+
             } else {
+                if (res.data.redirect) {
+                    location.href = res.data.redirect + `?status=${res.data.status}&message=${res.data.message}`;
+                }
                 snackbar(res.data.message, 'circle-exclamation');
             }
 
-            if (res.data.redirect) {
-                location.href = res.data.redirect;
-            }
+
         }).catch(function (error) {
             snackbar(error.response.status, 'triangle-exclamation');
         })
@@ -89,15 +102,21 @@ aboutForm.addEventListener('submit', (e) => {
         //post
         axios.post(actionURL, formData).then(res => {
             if (res.data.status == 'success') {
-                snackbar(res.data.message, 'check');
-                aboutSubmitBtn.disabled = false;
+                if (res.data.redirect) {
+                    location.href = res.data.redirect + `?status=${res.data.status}&message=${res.data.message}&ic=check`;
+                } else {
+                    snackbar(res.data.message, 'check');
+                    aboutSubmitBtn.disabled = false;
+                }
+
+
             } else {
+                if (res.data.redirect) {
+                    location.href = res.data.redirect;
+                }
                 snackbar(res.data.message, 'circle-exclamation');
             }
 
-            if (res.data.redirect) {
-                location.href = res.data.redirect;
-            }
         }).catch(function (error) {
             snackbar(error.response.status, 'triangle-exclamation');
         })
@@ -133,18 +152,24 @@ passwordForm.addEventListener('submit', (e) => {
     //post
     axios.post(actionURL, formData).then(res => {
         if (res.data.status == 'success') {
-            snackbar(res.data.message, 'check');
-            passwordSubmitBtn.disabled = false;
-            currentPasswordInput.value = '';
-            newPasswordInput.value = '';
-            confirmNewPasswordInput.value = '';
+            if (res.data.redirect) {
+                location.href = res.data.redirect + `?status=${res.data.status}&message=${res.data.message}&ic=check`;
+            } else {
+                snackbar(res.data.message, 'check');
+                passwordSubmitBtn.disabled = false;
+                currentPasswordInput.value = '';
+                newPasswordInput.value = '';
+                confirmNewPasswordInput.value = '';
+            }
         } else {
+            if (res.data.redirect) {
+                location.href = res.data.redirect;
+            }
             snackbar(res.data.message, 'circle-exclamation');
+
         }
 
-        if (res.data.redirect) {
-            location.href = res.data.redirect;
-        }
+
     }).catch(function (error) {
         snackbar(error.response.status, 'triangle-exclamation');
     })
@@ -172,14 +197,18 @@ photoForm.addEventListener('submit', (e) => {
     //post
     axios.post(actionURL, formData).then(res => {
         if (res.data.status == 'success') {
-            snackbar(res.data.message, 'check');
-            passwordSubmitBtn.disabled = false;
+            if (res.data.redirect) {
+                location.href = res.data.redirect + `?status=${res.data.status}&message=${res.data.message}&ic=check`;
+            } else {
+                snackbar(res.data.message, 'check');
+                passwordSubmitBtn.disabled = false;
+            }
         } else {
-            snackbar(res.data.message, 'circle-exclamation');
-        }
-
-        if (res.data.redirect) {
-            location.href = res.data.redirect;
+            if (res.data.redirect) {
+                location.href = res.data.redirect;
+            } else {
+                snackbar(res.data.message, 'circle-exclamation');
+            }
         }
     }).catch(function (error) {
         snackbar(error.response.status, 'triangle-exclamation');

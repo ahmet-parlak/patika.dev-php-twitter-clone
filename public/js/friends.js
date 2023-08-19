@@ -32,7 +32,7 @@ function cancelFriendshipRequest(element) {
         }
 
         if (res.data.redirect) {
-            window.location.href = res.data.redirect;
+            window.location.href = res.data.redirect + `?status=${res.data.status}&message=${res.data.message}`;
         }
     });
 }

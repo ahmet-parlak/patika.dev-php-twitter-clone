@@ -21,19 +21,22 @@ function cancelFriendshipRequest(element) {
     formData.append('request', 'cancel');
     //post
     axios.post(actionUrl, formData).then(res => {
-        snackbar(res.data.message);
-
-        if (res.data.status == 'success') {
-            element.innerHTML = 'Send Request  <i class="fa-solid fa-user-plus ml-2"></i>';
-            element.setAttribute('title', 'Friendship Request');
-            element.classList.remove("hover:bg-red-500");
-            element.onclick = friendshipRequest.bind(this, element);
-            element.closest('div').querySelector('span')?.remove();
-        }
-
         if (res.data.redirect) {
-            window.location.href = res.data.redirect;
+            location.href = res.data.redirect + `?status=${res.data.status}&message=${res.data.message}`;
+        } else {
+            snackbar(res.data.message);
+
+            if (res.data.status == 'success') {
+                element.innerHTML = 'Send Request  <i class="fa-solid fa-user-plus ml-2"></i>';
+                element.setAttribute('title', 'Friendship Request');
+                element.classList.remove("hover:bg-red-500");
+                element.onclick = friendshipRequest.bind(this, element);
+                element.closest('div').querySelector('span')?.remove();
+            }
         }
+
+
+
     });
 }
 
@@ -44,25 +47,28 @@ function acceptFriendshipRequest(element) {
     formData.append('request', 'accept');
     //post
     axios.post(actionUrl, formData).then(res => {
-        snackbar(res.data.message);
+        if (res.data.redirect) {
+            location.href = res.data.redirect + `?status=${res.data.status}&message=${res.data.message}`;
+        } else {
+            snackbar(res.data.message);
 
-        if (res.data.status == 'success') {
-            element.parentElement.parentElement.querySelector('span')?.remove();
+            if (res.data.status == 'success') {
+                element.parentElement.parentElement.querySelector('span')?.remove();
 
-            const div = element.closest('div');
-            div.innerHTML = '';
-            div.innerHTML = `<button action="${actionUrl}"
+                const div = element.closest('div');
+                div.innerHTML = '';
+                div.innerHTML = `<button action="${actionUrl}"
             class="self-center bg-default h-min hover:bg-red-500 text-white py-2 px-5 rounded-full font-bold hover:shadow-xl"
             title="Unfriend" onclick="unfriend(this)">
             Unfriend<i class="fa-solid fa-user-minus ml-2"></i>
         </button>`;
-            element.setAttribute('title', 'Unfriend');
-            element.onclick = unfriend.bind(this, element);
+                element.setAttribute('title', 'Unfriend');
+                element.onclick = unfriend.bind(this, element);
 
+            }
         }
-        if (res.data.redirect) {
-            window.location.href = res.data.redirect;
-        }
+
+
     });
 }
 
@@ -114,16 +120,19 @@ function unfriend(element) {
     formData.append('request', 'unfriend');
     //post
     axios.post(actionUrl, formData).then(res => {
-        snackbar(res.data.message);
-
-        if (res.data.status == 'success') {
-            element.innerHTML = 'Send Request<i class="fa-solid fa-user-plus ml-2"></i>';
-            element.setAttribute('title', 'Friendship Request');
-            element.classList.remove("hover:bg-red-500");
-            element.onclick = friendshipRequest.bind(this, element);
-        }
         if (res.data.redirect) {
-            window.location.href = res.data.redirect;
+            location.href = res.data.redirect + `?status=${res.data.status}&message=${res.data.message}`;
+        } else {
+            snackbar(res.data.message);
+
+            if (res.data.status == 'success') {
+                element.innerHTML = 'Send Request<i class="fa-solid fa-user-plus ml-2"></i>';
+                element.setAttribute('title', 'Friendship Request');
+                element.classList.remove("hover:bg-red-500");
+                element.onclick = friendshipRequest.bind(this, element);
+            }
         }
+
+
     });
 }

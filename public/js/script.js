@@ -127,7 +127,7 @@ async function addTweet(tweet, toTop = false) {
   const date = convertDate(tweet.date)
   date.longDate = addDotBeforeTime(date.longDate);
   date.shortDate = addDotBeforeTime(date.shortDate);
-  
+
 
   function addDotBeforeTime(date) {//e.g.:19.08.2023 15:23 => 19.08.2023 · 15:23
     const arr = date.split(' ');
@@ -135,7 +135,7 @@ async function addTweet(tweet, toTop = false) {
     const temp = arr[arr.length - 1];
     arr[arr.length - 1] = arr[arr.length - 2];
     arr[arr.length - 2] = temp;
-    return arr.join(' '); 
+    return arr.join(' ');
   }
   userUsername.innerHTML = `@${tweet.user.username} • <span title="${date.longDate}">${date.shortDate}</span>`;
 
@@ -180,7 +180,7 @@ function logout(e) {
   axios.post(actionURL).then(res => {
     //toast(res.data.status, res.data.message);
     if (res.data.redirect) {
-      window.location.href = res.data.redirect;
+      window.location.href = res.data.redirect + `?status=${res.data.status}&message=${res.data.message}`;
     }
     e.disabled = false;
     loadingToggle('.log-out');
@@ -214,18 +214,56 @@ function convertDate(date = "2023-08-19 15:23:14") {
 
   // Formatted date printout
   const timeZone = 'en-US';
-  const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: "h24"};
+  const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: "h24" };
   const longDate = new Intl.DateTimeFormat(timeZone, options).format(dateFromServer);
 
-  const shortOpt = { month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: "h24"};
+  const shortOpt = { month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: "h24" };
   const shortDate = new Intl.DateTimeFormat(timeZone, shortOpt).format(dateFromServer);
 
   const formattedDate = {
-    shortDate: shortDate.replace(/at|,/g,''),
-    longDate: longDate.replace(/at|,/g,'')
+    shortDate: shortDate.replace(/at|,/g, ''),
+    longDate: longDate.replace(/at|,/g, '')
   };
   return formattedDate; // e.g.: 19 Ağustos 2023 15:23
 }
 
 
 /* #Date Convert# */
+
+
+/* Notifications */
+function getParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  return urlParams.get(param);
+}
+
+const notStatus = getParam('status');
+const notMsg = getParam('message');
+const notic = getParam('ic');
+
+
+if (notMsg) {
+  let icon = null;
+  if (notic) {
+    switch (notic) {
+      case 'check':
+        icon = 'check';
+        break;
+
+      case 'warning':
+        icon = 'triangle-exclamation';
+        break;
+
+      default:
+        icon = null;
+        break;
+    }
+  }
+  icon ? snackbar(notMsg, icon) : snackbar(notMsg);
+  let currentURL = window.location.href;
+  let cleanedURL = currentURL.split('?')[0];
+  window.history.replaceState({}, document.title, cleanedURL);
+}
+
+/* #Notifications# */
