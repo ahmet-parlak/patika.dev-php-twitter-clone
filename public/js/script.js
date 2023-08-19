@@ -124,7 +124,20 @@ async function addTweet(tweet, toTop = false) {
 
   const userUsername = document.createElement('p'); //username
   userUsername.classList.add("text-gray-500");
-  userUsername.textContent = `@${tweet.user.username} • ${tweet.date}`;
+  const date = convertDate(tweet.date)
+  date.longDate = addDotBeforeTime(date.longDate);
+  date.shortDate = addDotBeforeTime(date.shortDate);
+  
+
+  function addDotBeforeTime(date) {//e.g.:19.08.2023 15:23 => 19.08.2023 · 15:23
+    const arr = date.split(' ');
+    arr.push('·');
+    const temp = arr[arr.length - 1];
+    arr[arr.length - 1] = arr[arr.length - 2];
+    arr[arr.length - 2] = temp;
+    return arr.join(' '); 
+  }
+  userUsername.innerHTML = `@${tweet.user.username} • <span title="${date.longDate}">${date.shortDate}</span>`;
 
   userNameParent.appendChild(userName);  //append user name to user name
   userNameParent.appendChild(userUsername); //append username to user name
@@ -175,7 +188,44 @@ function logout(e) {
 }
 /* #Log Out# */
 
-
+/* Timeout */
 function timeout(ms = 0) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+/* #Timeout# */
+
+/* Date Convert */
+function convertDate(date = "2023-08-19 15:23:14") {
+  const dateStringFromServer = date;
+
+  // String to Date obj
+  const parts = dateStringFromServer.split(" ");
+  const datePart = parts[0];
+  const timePart = parts[1];
+  const dateComponents = datePart.split("-");
+  const timeComponents = timePart.split(":");
+  const year = parseInt(dateComponents[0]);
+  const month = parseInt(dateComponents[1]) - 1; // In JavaScript months start at 0
+  const day = parseInt(dateComponents[2]);
+  const hour = parseInt(timeComponents[0]);
+  const minute = parseInt(timeComponents[1]);
+
+  const dateFromServer = new Date(year, month, day, hour, minute);
+
+  // Formatted date printout
+  const timeZone = 'en-US';
+  const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: "h24"};
+  const longDate = new Intl.DateTimeFormat(timeZone, options).format(dateFromServer);
+
+  const shortOpt = { month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: "h24"};
+  const shortDate = new Intl.DateTimeFormat(timeZone, shortOpt).format(dateFromServer);
+
+  const formattedDate = {
+    shortDate: shortDate.replace(/at|,/g,''),
+    longDate: longDate.replace(/at|,/g,'')
+  };
+  return formattedDate; // e.g.: 19 Ağustos 2023 15:23
+}
+
+
+/* #Date Convert# */
