@@ -27,7 +27,7 @@
         <div class="users space-y-4">
             <?php
             if (count($friends) == 0) { ?>
-                <div class="friends-count text-center pt-2">
+                <div class="friends-count text-center mt-6">
                     You don't have a friend yet.
                 </div>
             <?php } ?>

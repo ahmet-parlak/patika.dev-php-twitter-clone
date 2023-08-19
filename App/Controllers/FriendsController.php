@@ -19,9 +19,9 @@ class FriendsController extends Controller
     public function requests()
     {
         $model = new Friendship();
-        $friends = $model->getRequests();
+        $requests = $model->getRequests();
         
-        $this->render('friends/requests', compact('friends'));
+        $this->render('friends/requests', compact('requests'));
     }
 
     

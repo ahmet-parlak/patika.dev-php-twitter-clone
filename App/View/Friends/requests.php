@@ -7,7 +7,7 @@
     <div class="container w-598 border-r">
         <div class="header">
             <div class="px-4 py-2 font-bold text-xl">
-                Friends
+                Requests
             </div>
 
             <div class="flex">
@@ -25,9 +25,15 @@
 
         <!-- Users -->
         <div class="users space-y-4">
+            <?php
+            if (count($requests) == 0) { ?>
+                <div class="requests-count text-center mt-6">
+                    There is no request
+                </div>
+            <?php } ?>
 
             <?php
-            foreach ($friends as $user) {
+            foreach ($requests as $user) {
                 includeStaticFile('widgets/user', compact('user'));
             }
             ?>
