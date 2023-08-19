@@ -31,9 +31,18 @@ function loadFlow(element) {
 
 
             const tweets = res.data.data;
-            tweets.forEach(async tweet => {
-                await addTweetFromData(tweet);
-            });
+            if (tweets) {
+                tweets.forEach(async tweet => {
+                    await addTweetFromData(tweet);
+                });
+            } else {
+                tweetsDiv.innerHTML = `<div class="border-t text-center py-4">
+                <p>There is no tweet to show here yet.</p>
+                <p class="mt-2">Check out the Discover feed to view recent tweets and discover new users.</p>
+            </div>`;
+            }
+
+
             loadingToggle('.tweets-loading');
             discoverBtn.disabled = false;
             friendsBtn.disabled = false;
