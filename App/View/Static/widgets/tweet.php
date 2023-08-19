@@ -3,7 +3,6 @@ $name = $tweet->name ?? $user->name;
 $username = $tweet->username ?? $user->username;
 $user_photo = isset($tweet->photo_url) ? $tweet->photo_url : (isset($user->photo_url) ? $user->photo_url : '');
 
-date_default_timezone_set('Europe/Istanbul');
 $date = strtotime($tweet->date);
 $shortDate = date("d F · H.i", $date);
 $longDate = date("d.m.Y · H.i", $date);

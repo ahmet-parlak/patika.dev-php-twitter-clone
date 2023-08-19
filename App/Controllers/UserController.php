@@ -45,12 +45,14 @@ class UserController extends Controller
         }
 
         if ($friendship == 'friend' || $username == auth('username')) {
+            $friend_count = $friendshipsModel->getFriendCount($user);
             $tweets = $user->getTweets();
         } else {
+            $friend_count = null;
             $tweets = [];
         }
 
-        $this->render('user/index', compact('user', 'tweets', 'friendship'));
+        $this->render('user/index', compact('user', 'tweets', 'friendship', 'friend_count'));
     }
 
     public function friendshipRequest($username)

@@ -111,13 +111,22 @@
                 <div class="about px-1 py-2">
                     <?= $user->about ?>
                 </div>
-                <div class="date">
+                <div class="date text-gray-700">
                     <i class="fa-solid fa-calendar-days text-gray-700"></i>
-                    <?= 'Joined ' . $user->created_date ?>
+                    <?php
+                    $date = strtotime($user->created_date);
+                    $date = date("M Y", $date);
+                    ?>
+                    <?= 'Joined ' . $date ?>
                 </div>
-                <div class="friendships flex gap-5 mt-2">
-                    <div class="following font-bold">0 <span class="text-gray-600 font-normal">Friends</span></div>
-                </div>
+                <?php
+                if ($friend_count != null) { ?>
+                    <div class="friendships flex gap-5 mt-2">
+                        <div class="following font-bold">
+                            <?= $friend_count ?> <span class="text-gray-600 font-normal">Friends</span>
+                        </div>
+                    </div>
+                <?php } ?>
 
             </div>
         </div>

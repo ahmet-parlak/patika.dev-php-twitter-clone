@@ -69,7 +69,7 @@ class Friendship extends Model
             return false;
         }
     }
-    
+
 
     public function removeRequest(User $user)
     {
@@ -152,5 +152,15 @@ class Friendship extends Model
         $q->execute(['auth_id' => auth('id')]);
 
         return $q->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function getFriendCount($user)
+    {
+
+        $q = "SELECT COUNT(*) as firend_count FROM friendships WHERE  (sender_user_id = :user_id OR receiver_user_id = :user_id) AND status = 'accepted'";
+        $q = $this->db->prepare($q);
+        $q->execute(['user_id' => $user->id]);
+        $t = $q->fetchObject();
+        return $t->firend_count;
     }
 }
