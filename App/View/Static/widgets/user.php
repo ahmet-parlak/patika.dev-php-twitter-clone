@@ -17,10 +17,6 @@ $status = $user->relationship_type ?? null;
                 <?= '@' . $username ?>
             </p>
         </div>
-
-        <div class="date self-center text-end px-2">
-            <?= $date ?>
-        </div>
     </div>
 
     <?php
