@@ -131,11 +131,14 @@
             ?>
 
             <?php
-            if ($friendship != 'friend') { ?>
+            if ($friendship != 'friend' && $user->username != auth('username')) { ?>
                 <div class="text-center border-t pt-2">
                     Only friends can view the user's tweets.
                 </div>
-            <?php } elseif (count($tweets) == 0) { ?>
+            <?php } elseif (count($tweets) == 0 && $user->username == auth('username')) { ?>
+                <div class="text-center border-t pt-2">You have not tweeted yet.</div>
+                <?php
+            } elseif (count($tweets) == 0) { ?>
                 <div class="text-center border-t pt-2">User has not tweeted yet.</div>
             <?php } ?>
         </div>

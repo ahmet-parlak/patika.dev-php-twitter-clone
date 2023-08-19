@@ -44,7 +44,7 @@ class UserController extends Controller
             $friendship = null;
         }
 
-        if ($friendship == 'friend') {
+        if ($friendship == 'friend' || $username == auth('username')) {
             $tweets = $user->getTweets();
         } else {
             $tweets = [];
