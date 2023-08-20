@@ -8,7 +8,7 @@ const DB = 'patika_twitter_clone';
 const DB_USERNAME = 'root';
 const DB_PASSWORD = '';
 
-
+//default user password 123456
 const DEFAULT_PAGE_TITLE = 'Twitter Clone | Patika.dev';
 const DEFAULT_PROFILE_PHOTO_URL = URL . "public/images/profile/default.png";
 
